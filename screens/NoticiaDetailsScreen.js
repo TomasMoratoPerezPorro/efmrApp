@@ -4,7 +4,7 @@ import { SocialIcon } from "react-native-elements";
 
 const NoticiaContext = createContext({});
 
-function NoticiaScreen({ route, navigation }) {
+function NoticiaDetailsScreen({ route, navigation }) {
   const { itemId } = route.params;
   const { otherParam } = route.params;
   console.log(otherParam.title);
@@ -138,7 +138,7 @@ const About = () => {
   );
 };
 
-export default NoticiaScreen;
+export default NoticiaDetailsScreen;
 
 const styles = StyleSheet.create({
   page: {

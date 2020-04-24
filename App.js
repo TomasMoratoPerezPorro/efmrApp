@@ -2,12 +2,13 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { StyleSheet, View,Text } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import "react-native-gesture-handler";
 import { SafeAreaProvider, useSafeArea } from "react-native-safe-area-context";
 import AudiosScreen from "./screens/AudiosScreen";
 import NoticiesScreen from "./screens/NoticiesScreen";
-import NoticiaScreen from "./screens/NoticiaScreen";
+import NoticiaDetailsScreen from "./screens/NoticiaDetailsScreen";
+import AudioDetailScreen from "./screens/AudioDetailScreen";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -17,7 +18,7 @@ const HomePage = ({ navigation }) => {
   const insets = useSafeArea();
   // <NumberList length={40} />
   return (
-    <View style={[styles.homePage, { paddingTop: insets.top }]}>
+    <View style={[styles.homePage, { paddingTop: 1 }]}>
       <Tab.Navigator
         initialRouteName="AudiosScreen"
         screenOptions={{}}
@@ -40,8 +41,6 @@ const HomePage = ({ navigation }) => {
   );
 };
 
-
-
 export default function App() {
   // b) Posar com a arrel de l'app el SafeAreaProvider
   return (
@@ -54,13 +53,13 @@ export default function App() {
             },
             headerTintColor: "#fff",
             headerTitleStyle: {
-              fontWeight: "regular",
+              fontWeight: "normal",
             },
           }}
         >
           <Stack.Screen name="EFMR" component={HomePage} />
-          <Stack.Screen name="NoticiaScreen" component={NoticiaScreen} />
-          {/* <HomePage /> */}
+          <Stack.Screen name="NoticiaScreen" component={NoticiaDetailsScreen} />
+          <Stack.Screen name="AudioScreen" component={AudioDetailScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
