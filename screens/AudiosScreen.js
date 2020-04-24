@@ -1,12 +1,12 @@
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { StyleSheet, ScrollView, Button } from "react-native";
-//COMPONENTS
-import UltimsProgrames from "../componentsAudioScreen/UltimsProgrames";
-import UltimsAudiosList from "../componentsAudioScreen/UltimsAudiosList";
+import { Button, ScrollView, StyleSheet } from "react-native";
+import AudioMesVist from "../componentsAudioScreen/AudioMesVist";
 import ButtonMesAudios from "../componentsAudioScreen/ButtonMesAudios";
 import InformatiuConca from "../componentsAudioScreen/InformatiuConca";
-import AudioMesVist from "../componentsAudioScreen/AudioMesVist";
+import UltimsAudiosList from "../componentsAudioScreen/UltimsAudiosList";
+//COMPONENTS
+import UltimsProgrames from "../componentsAudioScreen/UltimsProgrames";
 
 //DADES JAVI:
 const Audio = {};

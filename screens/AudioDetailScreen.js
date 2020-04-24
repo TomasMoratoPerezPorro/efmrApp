@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  Button,
-  Dimensions,
-  FlatList,
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Button, Dimensions, FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SocialIcon } from "react-native-elements";
 
 const numColumns = 2;
@@ -18,7 +9,6 @@ const photoSize = Math.floor(screenWidth / numColumns);
 const AudioProfile = ({ user2, user3, user4 }) => {
   return (
     <View>
-      
       <ImatgeNoticia user3={user3} user2={user2}></ImatgeNoticia>
       <TextNoticia user3={user3}></TextNoticia>
       <Redes></Redes>

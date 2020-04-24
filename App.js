@@ -2,14 +2,14 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 import "react-native-gesture-handler";
 import { SafeAreaProvider, useSafeArea } from "react-native-safe-area-context";
-import AudiosScreen from "./screens/AudiosScreen";
-import NoticiesScreen from "./screens/NoticiesScreen";
-import NoticiaDetailsScreen from "./screens/NoticiaDetailsScreen";
 import AudioDetailScreen from "./screens/AudioDetailScreen";
+import AudiosScreen from "./screens/AudiosScreen";
 import ContacteDetailScreen from "./screens/ContacteDetailScreen";
+import NoticiaDetailsScreen from "./screens/NoticiaDetailsScreen";
+import NoticiesScreen from "./screens/NoticiesScreen";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -61,7 +61,10 @@ export default function App() {
           <Stack.Screen name="EFMR" component={HomePage} />
           <Stack.Screen name="NoticiaScreen" component={NoticiaDetailsScreen} />
           <Stack.Screen name="AudioScreen" component={AudioDetailScreen} />
-          <Stack.Screen name="ContacteScreen" component={ContacteDetailScreen} />
+          <Stack.Screen
+            name="ContacteScreen"
+            component={ContacteDetailScreen}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
