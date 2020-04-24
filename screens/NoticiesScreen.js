@@ -241,6 +241,7 @@ const NoticiesScreen = () => {
       <Portada text={"LA NOTÍCIA MÉS LLEGIDA"}></Portada>
       <NoticiaMesLlegida bestnoticia={noticiaMontblanc}></NoticiaMesLlegida>
       <ButtonNoticies text={"CONTACTA AMB NOSALTRES"}></ButtonNoticies>
+      <Portada text={"El Canvi al projecte, nou titol"}></Portada>
     </ScrollView>
   );
 };
