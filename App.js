@@ -9,6 +9,7 @@ import AudiosScreen from "./screens/AudiosScreen";
 import NoticiesScreen from "./screens/NoticiesScreen";
 import NoticiaDetailsScreen from "./screens/NoticiaDetailsScreen";
 import AudioDetailScreen from "./screens/AudioDetailScreen";
+import ContacteDetailScreen from "./screens/ContacteDetailScreen";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -60,6 +61,7 @@ export default function App() {
           <Stack.Screen name="EFMR" component={HomePage} />
           <Stack.Screen name="NoticiaScreen" component={NoticiaDetailsScreen} />
           <Stack.Screen name="AudioScreen" component={AudioDetailScreen} />
+          <Stack.Screen name="ContacteScreen" component={ContacteDetailScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

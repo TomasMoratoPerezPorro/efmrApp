@@ -13,6 +13,8 @@ import {
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
+
+//Dades Pep
 const fakeNoticia = {
   name: "Desconcert pel retard dels ajuts de la riuada, mig any després",
   avatar: "http://files.pauek.info/harriet.jpg",
@@ -30,6 +32,14 @@ const fakeNoticia = {
   imag2:
     "https://www.efmr.cat/wp-content/uploads/2020/04/WhatsApp-Image-2020-04-21-at-13.42.28-1536x768.jpeg",
 };
+
+//DADES JAVI
+const ImgContacte={
+
+  imgEspluga: 'https://s3-alpha-sig.figma.com/img/b0fc/77af/c18ff98b6dd11a231fc9df57e1da4428?Expires=1588550400&Signature=aGZBfgGJcABqv0XDcSVjrOzTyFLMLdaoAj8d4i2bMc5iRjFvQNvF8rWD9odxRs-wtEleI7-4Qq9mizYKlxcCP-N6HPfPM5JnpObq37cai8YiHI8RIiXoQ-9dhYyGZZJjysgDgH32ukFNcvAAlHiMm9MwqQIqx61J81OjtJLamzSNOkupl0IVbXI1RyTGIuxDYOUju45KECKGPYiBbWp~dcWS9ZDKdJTTpUmR63y~xpFTDzftBf60kND9bw1wYIVCHz0m4Q2XRxLWZXTA7PG1-myMpnQzrvzaYMdo2ybVec7vy2u8MXcUdn6kgEDoRO5a2b35FZTGbzXCRzgG1hFDyw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA',
+  imgTaco: 'https://www.tacoalt.cat/images/TACOALT.png',
+  imgEsplugaAud: 'https://www.efmr.cat/wp-content/uploads/2018/03/Logo_EA4x.png'
+}
 
 //const UserContext = createContext(/* user */ {});
 
@@ -164,12 +174,22 @@ const NoticiesList = ({ navigation }) => {
   );
 };
 
-const ButtonNoticies = ({ text }) => {
+const ButtonNoticies = ({ text, navigation }) => {
   return (
     <View style={styles.BotoNoticiesContainer}>
-      <View style={styles.BotoNoticies}>
-        <Text style={styles.BotoNoticiesText}>{text}</Text>
-      </View>
+      <TouchableHighlight
+        activeOpacity={0.6}
+        underlayColor="#DDDDDD"
+        onPress={() => {
+          navigation.navigate("ContacteScreen", {
+            infoContacte: ImgContacte,
+          });
+        }}
+      >
+        <View style={styles.BotoNoticies}>
+          <Text style={styles.BotoNoticiesText}>{text}</Text>
+        </View>
+      </TouchableHighlight>
     </View>
   );
 };
@@ -282,7 +302,7 @@ const NoticiesScreen = ({ navigation }) => {
       <EtiquetaList array={fakeEtiquetes}></EtiquetaList>
       <Portada text={"LA NOTÍCIA MÉS LLEGIDA"}></Portada>
       <NoticiaMesLlegida bestnoticia={noticiaMontblanc}></NoticiaMesLlegida>
-      <ButtonNoticies text={"CONTACTA AMB NOSALTRES"}></ButtonNoticies>
+      <ButtonNoticies text={"CONTACTA AMB NOSALTRES"} navigation={navigation}></ButtonNoticies>
     </ScrollView>
   );
 };
