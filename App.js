@@ -17,7 +17,7 @@ const Tab = createMaterialTopTabNavigator();
 const HomePage = ({ navigation }) => {
   // c) amb 'useSafeArea' obtenim els "insets" de cada costat
   const insets = useSafeArea();
-  // <NumberList length={40} /> TESTTEJHBASDJGKLHKDASKHJÑKDÑBNAJSJKNLÑDSASJLNKDSKANJLADSKNJADSS
+  // <NumberList length={40} /> 
   return (
     <View style={[styles.homePage, { paddingTop: 1 }]}>
       <Tab.Navigator
