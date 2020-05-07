@@ -31,7 +31,7 @@ const AudioMesVist = () => {
         <VerticalSep />
         <View>
           <Text style={styles.textS}>
-            L'ajuntament a Casa del diumenge 8 de març del 2020
+            L'ajuntament a Casa del diumenge 7 de març del 2020
           </Text>
         </View>
       </View>
