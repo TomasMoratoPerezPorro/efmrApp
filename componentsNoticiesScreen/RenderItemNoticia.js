@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 
-const RenderItemNoticia = ({ titular, data, seccio, thumbnail }) => {
+const RenderItemNoticia = ({ title, date, categories, thumbnail }) => {
     //const noticia = useContext(UserContext);
     return (
       <View style={styles.itemLlistaNoticies}>
@@ -10,11 +10,11 @@ const RenderItemNoticia = ({ titular, data, seccio, thumbnail }) => {
           source={{ uri: thumbnail }}
         ></Image>
         <View style={styles.itemLlistaNoticiesCol}>
-          <Text style={{ fontWeight: "bold" }}>{titular}</Text>
+          <Text style={{ fontWeight: "bold" }}>{title.rendered}</Text>
           <View style={styles.itemLlistaNoticiesSeccio}>
-            <Text style={styles.itemLlistaNoticiesSeccioText}>{seccio}</Text>
+            <Text style={styles.itemLlistaNoticiesSeccioText}>{categories[0]}</Text>
           </View>
-          <Text style={{ fontSize: 10 }}>{data}</Text>
+          <Text style={{ fontSize: 10 }}>{date}</Text>
         </View>
       </View>
     );

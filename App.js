@@ -10,6 +10,7 @@ import AudiosScreen from "./screens/AudiosScreen";
 import ContacteDetailScreen from "./screens/ContacteDetailScreen";
 import NoticiaDetailsScreen from "./screens/NoticiaDetailsScreen";
 import NoticiesScreen from "./screens/NoticiesScreen";
+import {NoticiesProvider} from "./model/NoticiesModel";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -45,6 +46,7 @@ const HomePage = ({ navigation }) => {
 export default function App() {
   // b) Posar com a arrel de l'app el SafeAreaProvider
   return (
+    <NoticiesProvider>
     <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator
@@ -68,6 +70,7 @@ export default function App() {
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
+    </NoticiesProvider>
   );
 }
 
