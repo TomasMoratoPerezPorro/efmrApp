@@ -1,23 +1,39 @@
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View,ActivityIndicator } from "react-native";
 
-const RenderItemNoticia = ({ title, date, categories, thumbnail }) => {
-    //const noticia = useContext(UserContext);
-    return (
-      <View style={styles.itemLlistaNoticies}>
-        <Image
-          style={styles.itemLlistaNoticiesImatge}
-          source={{ uri: thumbnail }}
-        ></Image>
-        <View style={styles.itemLlistaNoticiesCol}>
-          <Text style={{ fontWeight: "bold" }}>{title.rendered}</Text>
-          <View style={styles.itemLlistaNoticiesSeccio}>
-            <Text style={styles.itemLlistaNoticiesSeccioText}>{categories[0]}</Text>
+const RenderItemNoticia = ({ title, date, categories, media }) => {
+    if(media==null){
+      return (
+        <View style={styles.itemLlistaNoticies}>
+          <ActivityIndicator size="large" />
+          <View style={styles.itemLlistaNoticiesCol}>
+            <Text style={{ fontWeight: "bold" }}>{title.rendered}</Text>
+            <View style={styles.itemLlistaNoticiesSeccio}>
+              <Text style={styles.itemLlistaNoticiesSeccioText}>{categories[0]}</Text>
+            </View>
+            <Text style={{ fontSize: 10 }}>{date}</Text>
           </View>
-          <Text style={{ fontSize: 10 }}>{date}</Text>
         </View>
-      </View>
-    );
+      );
+
+    }else{
+      return (
+        <View style={styles.itemLlistaNoticies}>
+          <Image
+            style={styles.itemLlistaNoticiesImatge}
+            source={{ uri: media.source_url }}
+          ></Image>
+          <View style={styles.itemLlistaNoticiesCol}>
+            <Text style={{ fontWeight: "bold" }}>{title.rendered}</Text>
+            <View style={styles.itemLlistaNoticiesSeccio}>
+              <Text style={styles.itemLlistaNoticiesSeccioText}>{categories[0]}</Text>
+            </View>
+            <Text style={{ fontSize: 10 }}>{date}</Text>
+          </View>
+        </View>
+      );
+    }
+    
   };
 
 

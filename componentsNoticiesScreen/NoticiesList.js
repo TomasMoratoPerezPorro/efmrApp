@@ -66,30 +66,60 @@ const NoticiesList = observer(() => {
         <ActivityIndicator size="large" />
       </View>
     );
-  }
+  } else if (noticies.noticies[9].media == null) {
+    noticies.loadMedia();
 
-  return (
-    <FlatList
-      data={noticies.noticies}
-      renderItem={({ item }) => (
-        <TouchableHighlight
-          activeOpacity={0.6}
-          underlayColor="#DDDDDD"
-          onPress={() => {
-            navigation.navigate("NoticiaScreen", {
-              itemId: 86,
-              otherParam: fakeNoticia,
-            });
-          }}
-        >
-          <RenderItemNoticia {...item} />
-        </TouchableHighlight>
-      )}
-      keyExtractor={(noticia) => noticia.data}
-      ItemSeparatorComponent={Separator}
-    ></FlatList>
-  );
+    return (
+      <FlatList
+        data={noticies.noticies}
+        renderItem={({ item }) => (
+          <TouchableHighlight
+            activeOpacity={0.6}
+            underlayColor="#DDDDDD"
+            onPress={() => {
+              navigation.navigate("NoticiaScreen", {
+                itemId: 86,
+                otherParam: fakeNoticia,
+              });
+            }}
+          >
+            <RenderItemNoticia {...item} />
+          </TouchableHighlight>
+        )}
+        keyExtractor={(noticia) => noticia.data}
+        ItemSeparatorComponent={Separator}
+      ></FlatList>
+    );
+  } else {
+    return (
+      <FlatList
+        data={noticies.noticies}
+        renderItem={({ item }) => (
+          <TouchableHighlight
+            activeOpacity={0.6}
+            underlayColor="#DDDDDD"
+            onPress={() => {
+              navigation.navigate("NoticiaScreen", {
+                itemId: 86,
+                otherParam: fakeNoticia,
+              });
+            }}
+          >
+            <RenderItemNoticia {...item} />
+          </TouchableHighlight>
+        )}
+        keyExtractor={(noticia) => noticia.data}
+        ItemSeparatorComponent={Separator}
+      ></FlatList>
+    );
+  }
 });
+
+{
+  /* <View style={styles.page}>
+        <Text>{JSON.stringify(noticies.noticies[0].media.source_url)}</Text>
+      </View> */
+}
 
 {
   /* <View style={styles.page}>
