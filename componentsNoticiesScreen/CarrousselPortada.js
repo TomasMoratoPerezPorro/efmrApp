@@ -8,6 +8,7 @@ const CarrousselPortada = ({ array }) => {
         data={
           array
         } /* {array.map((item, index) => ({ key: index, item: item }))} */
+        keyExtractor={(array) => array.titular}
         renderItem={({ item }) => <CarrousselItem {...item} />}
         horizontal={true}
       ></FlatList>

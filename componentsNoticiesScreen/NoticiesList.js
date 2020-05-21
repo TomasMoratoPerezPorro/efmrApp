@@ -72,21 +72,8 @@ const NoticiesList = observer(() => {
     return (
       <FlatList
         data={noticies.noticies}
-        renderItem={({ item }) => (
-          <TouchableHighlight
-            activeOpacity={0.6}
-            underlayColor="#DDDDDD"
-            onPress={() => {
-              navigation.navigate("NoticiaScreen", {
-                itemId: 86,
-                otherParam: fakeNoticia,
-              });
-            }}
-          >
-            <RenderItemNoticia {...item} />
-          </TouchableHighlight>
-        )}
-        keyExtractor={(noticia) => noticia.data}
+        renderItem={({ item }) => <RenderItemNoticia {...item} />}
+        keyExtractor={(noticia) => noticia.id.toString()}
         ItemSeparatorComponent={Separator}
       ></FlatList>
     );
@@ -94,21 +81,8 @@ const NoticiesList = observer(() => {
     return (
       <FlatList
         data={noticies.noticies}
-        renderItem={({ item }) => (
-          <TouchableHighlight
-            activeOpacity={0.6}
-            underlayColor="#DDDDDD"
-            onPress={() => {
-              navigation.navigate("NoticiaScreen", {
-                itemId: 86,
-                otherParam: fakeNoticia,
-              });
-            }}
-          >
-            <RenderItemNoticia {...item} />
-          </TouchableHighlight>
-        )}
-        keyExtractor={(noticia) => noticia.data}
+        renderItem={({ item }) => <RenderItemNoticia {...item} />}
+        keyExtractor={(noticia) => noticia.id.toString()}
         ItemSeparatorComponent={Separator}
       ></FlatList>
     );
