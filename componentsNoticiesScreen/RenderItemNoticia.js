@@ -18,13 +18,11 @@ const RenderItemNoticia = ({ title, date, categories, media }) => {
       </View>
     );
   } else {
-    
-
     return (
       <View style={styles.itemLlistaNoticies}>
         <Image
           style={styles.itemLlistaNoticiesImatge}
-          source={{ uri: media.source_url }}
+          source={{ uri: media.media_details.sizes.thumbnail.source_url }}
         ></Image>
         <View style={styles.itemLlistaNoticiesCol}>
           <Text style={{ fontWeight: "bold" }}>{title.rendered}</Text>

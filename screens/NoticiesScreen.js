@@ -141,7 +141,7 @@ const NoticiesScreen = ({ navigation }) => {
       <CarrousselPortada array={fakeNoticiesList}></CarrousselPortada>
       {/* <CarrousselItem {...fakeNoticiesList[2]}></CarrousselItem> */}
       <SeparadorPortada text={"NOTÍCIES"}></SeparadorPortada>
-      <NoticiesList></NoticiesList>
+      <NoticiesList navigation={navigation}></NoticiesList>
 
       <ButtonNoticies text={"+ NOTÍCIES"}></ButtonNoticies>
       <SeparadorPortada text={"ETIQUETES"}></SeparadorPortada>
