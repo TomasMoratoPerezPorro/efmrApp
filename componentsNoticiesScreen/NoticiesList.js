@@ -107,8 +107,12 @@ const NoticiesList = observer(({ navigation }) => {
             underlayColor="#DDDDDD"
             onPress={() => {
               navigation.navigate("NoticiaScreen", {
-                itemId: 86,
-                otherParam: fakeNoticia,
+                itemId: item.id,
+                itemTitle: item.title,
+                itemContent: item.content,
+                itemExcerpt: item.excerpt,
+                itemAuthor: item.author,
+                itemMedia: item.media,
               });
             }}
           >
