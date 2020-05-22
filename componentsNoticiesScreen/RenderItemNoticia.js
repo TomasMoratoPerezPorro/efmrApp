@@ -1,7 +1,15 @@
 import React from "react";
 import { Image, StyleSheet, Text, View, ActivityIndicator } from "react-native";
+import { Entities } from "html-entities";
+
 
 const RenderItemNoticia = ({ title, date, categories, media }) => {
+  const Entities = require('html-entities').AllHtmlEntities;
+  const entities = new Entities();
+  
+
+  title.rendered = entities.decode(title.rendered);
+  
   if (media == null) {
     return (
       <View style={styles.itemLlistaNoticies}>
@@ -18,23 +26,44 @@ const RenderItemNoticia = ({ title, date, categories, media }) => {
       </View>
     );
   } else {
-    return (
-      <View style={styles.itemLlistaNoticies}>
-        <Image
-          style={styles.itemLlistaNoticiesImatge}
-          source={{ uri: media.media_details.sizes.thumbnail.source_url }}
-        ></Image>
-        <View style={styles.itemLlistaNoticiesCol}>
-          <Text style={{ fontWeight: "bold" }}>{title.rendered}</Text>
-          <View style={styles.itemLlistaNoticiesSeccio}>
-            <Text style={styles.itemLlistaNoticiesSeccioText}>
-              {categories[0]}
-            </Text>
+    try {
+      return (
+        <View style={styles.itemLlistaNoticies}>
+          <Image
+            style={styles.itemLlistaNoticiesImatge}
+            source={{ uri: media.media_details.sizes.thumbnail.source_url }}
+          ></Image>
+          <View style={styles.itemLlistaNoticiesCol}>
+            <Text style={{ fontWeight: "bold" }}>{title.rendered}</Text>
+            <View style={styles.itemLlistaNoticiesSeccio}>
+              <Text style={styles.itemLlistaNoticiesSeccioText}>
+                {categories[0]}
+              </Text>
+            </View>
+            <Text style={{ fontSize: 10 }}>{date}</Text>
           </View>
-          <Text style={{ fontSize: 10 }}>{date}</Text>
         </View>
-      </View>
-    );
+      );
+    } catch (err) {
+      console.log(title + "----ERROR----\n" + err);
+      return (
+        <View style={styles.itemLlistaNoticies}>
+          <Image
+            style={styles.itemLlistaNoticiesImatge}
+            source={{ uri: "https://escuelaeuropea.org/sites/default/files/inline-images/no_image_available_web_0.jpeg" }}
+          ></Image>
+          <View style={styles.itemLlistaNoticiesCol}>
+            <Text style={{ fontWeight: "bold" }}>{title.rendered}</Text>
+            <View style={styles.itemLlistaNoticiesSeccio}>
+              <Text style={styles.itemLlistaNoticiesSeccioText}>
+                {categories[0]}
+              </Text>
+            </View>
+            <Text style={{ fontSize: 10 }}>{date}</Text>
+          </View>
+        </View>
+      );
+    }
   }
 };
 

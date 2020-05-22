@@ -8,6 +8,7 @@ import {
   View,
 } from "react-native";
 import { SocialIcon } from "react-native-elements";
+import HTMLView from "react-native-htmlview";
 
 const NoticiaContext = createContext({});
 
@@ -17,7 +18,7 @@ function NoticiaDetailsScreen({ route, navigation }) {
   const { itemContent } = route.params;
   const { itemExcerpt } = route.params;
   const { itemAuthor } = route.params;
-   const { itemMedia } = route.params; 
+  const { itemMedia } = route.params;
   /* console.log(itemTitle);  */
   return (
     <NoticiaContext.Provider
@@ -48,16 +49,36 @@ const VerticalSep = () => (
   />
 );
 
-const About = () => {
+const BgImage = () => {
   const Noticia = useContext(NoticiaContext);
-  
-  
-  return (
-    <View style={styles.about}>
+  try {
+    return (
       <ImageBackground
         style={styles.header}
-        source={{ uri: Noticia.media.media_details.sizes.medium_large.source_url }} 
+        source={{
+          uri: Noticia.media.media_details.sizes.medium_large.source_url,
+        }}
       ></ImageBackground>
+    );
+  } catch {
+    return (
+      <ImageBackground
+        style={styles.header}
+        source={{
+          uri:
+            "https://escuelaeuropea.org/sites/default/files/inline-images/no_image_available_web_0.jpeg",
+        }}
+      ></ImageBackground>
+    );
+  }
+};
+
+const About = () => {
+  const Noticia = useContext(NoticiaContext);
+
+  return (
+    <View style={styles.about}>
+      <BgImage></BgImage>
 
       <View style={styles.stats}>
         <View style={styles.statsCol}>
@@ -74,9 +95,8 @@ const About = () => {
       <View style={styles.aboutInner}>
         <Text style={styles.aboutTitle}>{Noticia.title.rendered}</Text>
         <Text style={styles.redactortitle}>{Noticia.author}</Text>
-        <Text style={styles.paragraf}>{Noticia.content.rendered}</Text>
-        <Text style={styles.paragraf}>{Noticia.Content}</Text>
-        <Text style={styles.paragraf}>{Noticia.Content}</Text>
+        {/* <Text style={styles.paragraf}>{Noticia.content.rendered}</Text> */}
+        <HTMLView value={Noticia.content.rendered} stylesheet={htmlstyles} />
 
         <View style={{ flexDirection: "row" }}>
           <SocialIcon
@@ -161,6 +181,23 @@ const About = () => {
 };
 
 export default NoticiaDetailsScreen;
+
+var htmlstyles = StyleSheet.create({
+  a: {
+    fontWeight: "300",
+    fontSize: 12,
+  },
+  p: {
+    fontSize: 12,
+  },
+  strong: {
+    fontWeight: "bold",
+    fontSize: 12,
+  },
+  li: {
+    fontSize: 12,
+  },
+});
 
 const styles = StyleSheet.create({
   page: {

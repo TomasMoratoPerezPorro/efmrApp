@@ -5,7 +5,7 @@ const myForEach = async function asyncForEach(array, callback) {
   for (let index = 0; index < array.length; index++) {
     await callback(array[index], index, array);
   }
-}
+};
 
 class NoticiesModel {
   @observable noticies = null;
@@ -16,21 +16,23 @@ class NoticiesModel {
     );
     const json = await response.json();
     this.noticies = json;
-    
   }
 
   @action async loadMedia() {
     await myForEach(this.noticies, async (noticia) => {
       var idmedia = noticia.featured_media;
       console.log(idmedia);
-      const responseMedia = await fetch(
-        "https://www.efmr.cat/wp-json/wp/v2/media/" +
-          idmedia +
-          "?_fields=id,source_url,media_details"
-      );
-      const jsonmedia = await responseMedia.json();
-      noticia.media = jsonmedia;
-      
+      try {
+        const responseMedia = await fetch(
+          "https://www.efmr.cat/wp-json/wp/v2/media/" +
+            idmedia +
+            "?_fields=id,source_url,media_details"
+        );
+        const jsonmedia = await responseMedia.json();
+        noticia.media = jsonmedia;
+      } catch (error) {
+        console.log(error+"-----"+idmedia);
+      }
     });
   }
 }
