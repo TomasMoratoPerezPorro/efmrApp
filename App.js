@@ -1,8 +1,8 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import React from "react";
-import { StyleSheet, View } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, View, ActivityIndicator } from "react-native";
 import "react-native-gesture-handler";
 import { SafeAreaProvider, useSafeArea } from "react-native-safe-area-context";
 import AudioDetailScreen from "./screens/AudioDetailScreen";
@@ -11,6 +11,9 @@ import ContacteDetailScreen from "./screens/ContacteDetailScreen";
 import NoticiaDetailsScreen from "./screens/NoticiaDetailsScreen";
 import NoticiesScreen from "./screens/NoticiesScreen";
 import {NoticiesProvider} from "./model/NoticiesModel";
+import {useFonts} from '@use-expo/font';
+
+
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -45,11 +48,25 @@ const HomePage = ({ navigation }) => {
 
 export default function App() {
   // b) Posar com a arrel de l'app el SafeAreaProvider
+
+  const [fontsLoaded] = useFonts({
+    "Rajdhani-Regular": require("./assets/fonts/Rajdhani-Regular.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return (
+    <View style={styles.homePage}>
+      <ActivityIndicator />
+    </View>
+    );
+ 
+  }
+
   return (
     <NoticiesProvider>
     <SafeAreaProvider>
       <NavigationContainer>
-        <Stack.Navigator
+        <Stack.Navigator 
           screenOptions={{
             headerStyle: {
               backgroundColor: "#3B0D11",
@@ -60,12 +77,13 @@ export default function App() {
             },
           }}
         >
-          <Stack.Screen name="EFMR" component={HomePage} />
-          <Stack.Screen name="NoticiaScreen" component={NoticiaDetailsScreen} />
-          <Stack.Screen name="AudioScreen" component={AudioDetailScreen} />
+          <Stack.Screen name="EFMR" component={HomePage}/>
+          <Stack.Screen name="NoticiaScreen" component={NoticiaDetailsScreen} style={styles.typo}/>
+          <Stack.Screen name="AudioScreen" component={AudioDetailScreen} style={styles.typo}/>
           <Stack.Screen
             name="ContacteScreen"
             component={ContacteDetailScreen}
+            style={styles.typo}
           />
         </Stack.Navigator>
       </NavigationContainer>
@@ -81,4 +99,9 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     justifyContent: "center",
   },
+  typo: {
+    fontFamily: "Rajdhani-Regular",
+    fontSize: 20,
+  },
+  
 });
