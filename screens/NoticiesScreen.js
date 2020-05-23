@@ -147,7 +147,7 @@ const NoticiesScreen = ({ navigation }) => {
       <SeparadorPortada text={"ETIQUETES"}></SeparadorPortada>
       <EtiquetaList array={fakeEtiquetes}></EtiquetaList>
       <SeparadorPortada text={"LA NOTÍCIA MÉS LLEGIDA"}></SeparadorPortada>
-      <NoticiaMesLlegida bestnoticia={noticiaMontblanc}></NoticiaMesLlegida>
+      <NoticiaMesLlegida navigation={navigation}></NoticiaMesLlegida>
       <ButtonNoticies
         text={"CONTACTA AMB NOSALTRES"}
         navigation={navigation}
