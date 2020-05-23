@@ -15,7 +15,11 @@ const CarrousselPortada = observer(({ navigation }) => {
   if (noticies.noticiesPortada == null) {
     return (
       <View style={styles.CarrousselItemContainer}>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator
+          size="large"
+          color="#3B0D11"
+          style={styles.activityIndicator}
+        />
       </View>
     );
   } else if (noticies.noticiesPortada[4].media == null) {
@@ -23,7 +27,11 @@ const CarrousselPortada = observer(({ navigation }) => {
 
     return (
       <View style={styles.CarrousselItemContainer}>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator
+          size="large"
+          color="#3B0D11"
+          style={styles.activityIndicator}
+        />
       </View>
     );
   } else {
@@ -41,6 +49,11 @@ const CarrousselPortada = observer(({ navigation }) => {
 export default CarrousselPortada;
 
 const styles = StyleSheet.create({
+  activityIndicator: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   CarrousselItemContainer: {
     flex: 1,
     width: windowWidth,
