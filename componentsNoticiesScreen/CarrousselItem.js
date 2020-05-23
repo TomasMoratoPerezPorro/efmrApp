@@ -1,28 +1,52 @@
 import React from "react";
-import { ImageBackground, StyleSheet, Text, View, Dimensions } from "react-native";
+import {
+  ImageBackground,
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+} from "react-native";
 
 const windowWidth = Dimensions.get("window").width;
 
-const CarrousselItem = ({ titular, thumbnail }) => {
-  return (
-    <View style={styles.CarrousselItemContainer}>
-      <ImageBackground
-        style={styles.CarrousselItemImage}
-        source={{ uri: thumbnail }}
-      >
-        <View style={styles.CarrousselItemOverlay}>
-          <Text style={styles.CarrousselText}>{titular}</Text>
-        </View>
-      </ImageBackground>
-    </View>
-  );
+const CarrousselItem = ({ title, media }) => {
+  const Entities = require('html-entities').AllHtmlEntities;
+  const entities = new Entities();
+  
+
+  title.rendered = entities.decode(title.rendered);
+  try {
+    return (
+      <View style={styles.CarrousselItemContainer}>
+        <ImageBackground
+          style={styles.CarrousselItemImage}
+          source={{ uri: media.media_details.sizes.thumbnail.source_url }}
+        >
+          <View style={styles.CarrousselItemOverlay}>
+            <Text style={styles.CarrousselText}>{title.rendered}</Text>
+          </View>
+        </ImageBackground>
+      </View>
+    );
+  }catch{
+    return (
+      <View style={styles.CarrousselItemContainer}>
+        <ImageBackground
+          style={styles.CarrousselItemImage}
+          source={{ uri: "https://escuelaeuropea.org/sites/default/files/inline-images/no_image_available_web_0.jpeg" }}
+        >
+          <View style={styles.CarrousselItemOverlay}>
+            <Text style={styles.CarrousselText}>{title.rendered}</Text>
+          </View>
+        </ImageBackground>
+      </View>
+    );
+
+  }
+  
 };
 
-
-
-
 export default CarrousselItem;
-
 
 const styles = StyleSheet.create({
   CarrousselItemContainer: {

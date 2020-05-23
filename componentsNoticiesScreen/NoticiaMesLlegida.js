@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Text,
   View,
+  TouchableHighlight,
 } from "react-native";
 import { NoticiesContext } from "../model/NoticiesModel";
 
@@ -27,7 +28,9 @@ const NoticiaMesLlegida = observer(({ navigation }) => {
       </View>
     );
   } else {
-    noticies.noticiaMesLlegida.title.rendered = entities.decode(noticies.noticiaMesLlegida.title.rendered);
+    noticies.noticiaMesLlegida.title.rendered = entities.decode(
+      noticies.noticiaMesLlegida.title.rendered
+    );
     return (
       <View style={styles.NoticiaMesLlegidaContainer}>
         <ImageBackground
@@ -38,18 +41,33 @@ const NoticiaMesLlegida = observer(({ navigation }) => {
                 .source_url,
           }}
         >
-          <View style={styles.NoticiaMesLlegidaFooterRow}>
-            <View style={styles.NoticiaMesLlegidaFooterColVisites}>
-              <Text style={styles.NoticiaMesLlegidaTextVisites}>
-                {noticies.noticiaMesLlegida.pageviews + " visites"}
-              </Text>
+          <TouchableHighlight
+            activeOpacity={0.6}
+            underlayColor="#DDDDDD"
+            onPress={() => {
+              navigation.navigate("NoticiaScreen", {
+                itemId: noticies.noticiaMesLlegida.id,
+                itemTitle: noticies.noticiaMesLlegida.title,
+                itemContent: noticies.noticiaMesLlegida.content,
+                itemExcerpt: noticies.noticiaMesLlegida.excerpt,
+                itemAuthor: noticies.noticiaMesLlegida.author,
+                itemMedia: noticies.noticiaMesLlegida.media,
+              });
+            }}
+          >
+            <View style={styles.NoticiaMesLlegidaFooterRow}>
+              <View style={styles.NoticiaMesLlegidaFooterColVisites}>
+                <Text style={styles.NoticiaMesLlegidaTextVisites}>
+                  {noticies.noticiaMesLlegida.pageviews + " visites"}
+                </Text>
+              </View>
+              <View style={styles.NoticiaMesLlegidaFooterColTitular}>
+                <Text style={styles.NoticiaMesLlegidaText}>
+                  {noticies.noticiaMesLlegida.title.rendered}
+                </Text>
+              </View>
             </View>
-            <View style={styles.NoticiaMesLlegidaFooterColTitular}>
-              <Text style={styles.NoticiaMesLlegidaText}>
-                {noticies.noticiaMesLlegida.title.rendered}
-              </Text>
-            </View>
-          </View>
+          </TouchableHighlight>
         </ImageBackground>
       </View>
     );
