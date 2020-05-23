@@ -1,6 +1,12 @@
 import { observable, action } from "mobx";
 import React, { createContext } from "react";
 
+const myForEach = async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    await callback(array[index], index, array);
+  }
+};
+
 class NoticiesModel {
   @observable noticies = null;
 
@@ -10,23 +16,23 @@ class NoticiesModel {
     );
     const json = await response.json();
     this.noticies = json;
-    this.noticies.forEach((noticia) => {
+  }
+
+  @action async loadMedia() {
+    await myForEach(this.noticies, async (noticia) => {
       var idmedia = noticia.featured_media;
-      const foo = async (idmedia) => {
+      console.log(idmedia);
+      try {
         const responseMedia = await fetch(
           "https://www.efmr.cat/wp-json/wp/v2/media/" +
             idmedia +
             "?_fields=id,source_url,media_details"
         );
         const jsonmedia = await responseMedia.json();
-        console.log(jsonmedia);
-        noticia.media=jsonmedia;
-        return jsonmedia;
-      };
-      
-
-      
-      
+        noticia.media = jsonmedia;
+      } catch (error) {
+        console.log(error+"-----"+idmedia);
+      }
     });
   }
 }

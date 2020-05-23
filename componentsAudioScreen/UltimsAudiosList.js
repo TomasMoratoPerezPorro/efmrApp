@@ -56,6 +56,7 @@ const UltimsAudiosList = () => {
       <FlatList
         data={fakeAudiosList}
         numColumns={numColumns}
+        keyExtractor={(audio) => audio.text}
         renderItem={({ item }) => <UltimsAudiosItem {...item} />}
       />
     </View>

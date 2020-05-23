@@ -7,6 +7,7 @@ const EtiquetaList = ({ array }) => {
     return (
       <FlatList
         data={array}
+        keyExtractor={(array) => array.nom}
         renderItem={({ item }) => <EtiquetaItem {...item} />}
         numColumns={2}
       ></FlatList>
