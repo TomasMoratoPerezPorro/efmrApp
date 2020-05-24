@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Dimensions, FlatList, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SocialIcon } from "react-native-elements";
+import { autorun } from "mobx";
 
 const numColumns = 2;
 const screenWidth = Dimensions.get("window").width;
@@ -23,43 +24,54 @@ const Header = () => {
 
 const ImatgeNoticia = ({ user2, user3 }) => {
   return (
-    <View style={styles.imatgenoticia}>
+    <View>
       <Image style={styles.imgnot} source={{ uri: user2.imgsup }}></Image>
-      <Text style={styles.titolnoticia}>{user3.titolnoticia}</Text>
 
-      <Text style={{ fontSize: 9, fontWeight: "bold", alignSelf: "flex-end" }}>
-        {"Per Redacció | EFMR.cat-" + user3.data}
+      <Text style={styles.redactortitle}>
+        {"Per Redacció | EFMR.cat - " + user3.data}
       </Text>
+
     </View>
   );
 };
 
 const TextNoticia = ({ user3 }) => {
   return (
+
+    <View style={styles.aboutInner}>
+        <View>
+          <Text style={styles.titolnoticia}>
+         {user3.titolnoticia}
+          </Text>
+        </View>
+    
     <View style={styles.textnoticia}>
       <Text style={{ fontSize: 18, fontWeight: "bold", paddingBottom: 10 }}>
-        {"  Àudio:"}
+        {"Àudio:"}
       </Text>
+      
       <Text
         style={{
           fontSize: 9,
           fontWeight: "bold",
           paddingBottom: 10,
-          paddingLeft: 6,
         }}
       >
-        {"Intèrprets:" + user3.interprets + "| Tècnic:" + user3.tecnic}
+        {"Intèrprets: " + user3.interprets + " | Tècnic: " + user3.tecnic}
       </Text>
-      <Text style={{ fontSize: 16, paddingBottom: 10, paddingLeft: 6 }}>
+      <Text style={{ fontSize: 16, paddingBottom: 10}}>
         {user3.textnoticia}
       </Text>
+    </View>
+
     </View>
   );
 };
 
 const Redes = () => {
   return (
-    <View style={styles.redes}>
+    <View>
+      <View style={styles.redes}>
       <SocialIcon
         style={styles.socialico}
         type="twitter"
@@ -96,23 +108,45 @@ const Redes = () => {
         }}
       />
     </View>
+
+    <View style={styles.buttonContainer}>
+        <Button onPress={goToMesAudios} title="+ ÀUDIOS" color="#E7D219" />
+    </View>
+    </View>
+    
   );
 };
 
 const UltimsAudios = ({ user4, user2 }) => {
   return (
-    <View style={styles.UltimsAudios}>
-      <Text style={{ fontSize: 13, fontWeight: "bold", paddingTop: 10 }}>
-        {"ÚLTIMS ÀUDIOS | ARA I SEMPRE "}
-      </Text>
-      <Image source={{ uri: user2.imgaud1 }} style={styles.imgaudio}></Image>
-      <Text>{user4.titolnoticia1} </Text>
-      <Image source={{ uri: user2.imgaud2 }} style={styles.imgaudio}></Image>
-      <Text>{user4.titolaudio2}</Text>
-      <View style={styles.buttonContainer}>
-        <Button onPress={goToMesAudios} title="+ ÀUDIOS" color="#E7D219" />
+    <View>
+      <Text style={styles.similar}>ÀUDIOS SIMILARS</Text>     
+      
+      
+      <View style={styles.audiosSimilars}>
+        <View style={styles.grid}>
+            <Image
+              style={styles.imagnoti}
+              source={{ uri: user2.imgaud1 }}
+            ></Image>
+            <Text style={styles.notitext}>
+              "L’espluguí, Ferran Lozano, participarà en una cursa solidària"
+            </Text>
+          </View>
+
+          <View style={styles.grid}>
+            <Image
+              style={styles.imagnoti}
+              source={{ uri: user2.imgaud2 }}
+            ></Image>
+            <Text style={styles.notitext}>
+              "La víctima mortal de l’accident de trànsit de l’Espluga era un
+              ..."
+            </Text>
+          </View>
       </View>
     </View>
+    
   );
 };
 
@@ -171,40 +205,61 @@ const AudioDetailScreen = ({ route, navigation }) => {
 
 export default AudioDetailScreen;
 
+var htmlstyles = StyleSheet.create({
+  a: {
+    fontWeight: "300",
+    fontSize: 12,
+  },
+  p: {
+    fontSize: 12,
+  },
+  strong: {
+    fontWeight: "bold",
+    fontSize: 12,
+  },
+  li: {
+    fontSize: 12,
+  },
+});
+
 const styles = StyleSheet.create({
   page: {
     flex: 1,
     backgroundColor: "white",
   },
   header: {
+    
     height: 80,
     backgroundColor: "#3B0D11",
   },
-  imatgenoticia: {
-    height: 237,
-    backgroundColor: "#C4C4C4",
+  aboutInner: {
+    backgroundColor: "white",
+    padding: 22,
   },
   titolnoticia: {
-    paddingTop: 150,
+    fontSize: 25,
     fontWeight: "bold",
-    fontSize: 24,
-    color: "white",
-    alignItems: "center",
-    position: "absolute",
+    marginBottom: 2,
   },
   textnoticia: {
-    paddingLeft: 6,
     paddingTop: 6,
   },
   imgnot: {
-    width: 400,
-    height: 220,
+    flex: 1,
+    height: 200,
+    justifyContent: "flex-end",
+    alignItems: "center",
+    backgroundColor: "red",
+    paddingBottom: 20,
   },
   redes: {
+    alignSelf: "center",
     flexDirection: "row",
     color: "#3B0D11",
   },
   socialico: {
+    height: 46,
+    width: 46,
     backgroundColor: "#7E0000",
   },
   UltimsAudios: {
@@ -242,5 +297,40 @@ const styles = StyleSheet.create({
   viewTot: {
     width: photoSize,
     paddingTop: 15,
+  },
+  redactortitle: {
+    color: "#0008",
+    fontSize: 12,
+    textAlign: "right",
+    padding: 5,
+    height: 30,
+    backgroundColor: "#ccc",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "stretch",
+  },
+  audiosSimilars: {
+    flex: 1,
+    flexDirection: "row",
+  },
+  grid: {
+    width: "50%",
+    height: 300,
+    
+  },
+  imagnoti: {
+    height: 130,
+    alignItems: "center",
+    backgroundColor: "red",
+    paddingBottom: 2,
+  },
+  notitext: {
+    fontSize: 15,
+    padding: 10,
+  },
+  similar: {
+    padding: 15,
+    fontWeight: "bold",
+    fontSize: 15,
   },
 });

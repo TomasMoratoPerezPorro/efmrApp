@@ -98,7 +98,7 @@ const About = () => {
         {/* <Text style={styles.paragraf}>{Noticia.content.rendered}</Text> */}
         <HTMLView value={Noticia.content.rendered} stylesheet={htmlstyles} />
 
-        <View style={{ flexDirection: "row" }}>
+        <View style={styles.redes}>
           <SocialIcon
             style={styles.socialico}
             type="twitter"
@@ -270,9 +270,16 @@ const styles = StyleSheet.create({
   buttonText: {
     fontWeight: "bold",
   },
+  redes: {
+    alignSelf: "center",
+    flexDirection: "row",
+    color: "#3B0D11",
+  },
 
   socialico: {
     backgroundColor: "#7E0000",
+    height: 46,
+    width: 46,
   },
 
   grid: {
