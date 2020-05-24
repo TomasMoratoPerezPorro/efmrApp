@@ -1,0 +1,149 @@
+{
+  "id": 42627,
+  "media_details": {
+    "width": 2000,
+    "height": 1333,
+    "file": "2019/02/Mossos-dEsquadra-Gerard-Bosch-3.jpg",
+    "sizes": {
+      "thumbnail": {
+        "file": "Mossos-dEsquadra-Gerard-Bosch-3-150x150.jpg",
+        "width": 150,
+        "height": 150,
+        "mime_type": "image/jpeg",
+        "source_url": "https://www.efmr.cat/wp-content/uploads/2019/02/Mossos-dEsquadra-Gerard-Bosch-3-150x150.jpg"
+      },
+      "medium": {
+        "file": "Mossos-dEsquadra-Gerard-Bosch-3-300x200.jpg",
+        "width": 300,
+        "height": 200,
+        "mime_type": "image/jpeg",
+        "source_url": "https://www.efmr.cat/wp-content/uploads/2019/02/Mossos-dEsquadra-Gerard-Bosch-3-300x200.jpg"
+      },
+      "medium_large": {
+        "file": "Mossos-dEsquadra-Gerard-Bosch-3-768x512.jpg",
+        "width": 768,
+        "height": 512,
+        "mime_type": "image/jpeg",
+        "source_url": "https://www.efmr.cat/wp-content/uploads/2019/02/Mossos-dEsquadra-Gerard-Bosch-3-768x512.jpg"
+      },
+      "large": {
+        "file": "Mossos-dEsquadra-Gerard-Bosch-3-1024x683.jpg",
+        "width": 1024,
+        "height": 683,
+        "mime_type": "image/jpeg",
+        "source_url": "https://www.efmr.cat/wp-content/uploads/2019/02/Mossos-dEsquadra-Gerard-Bosch-3-1024x683.jpg"
+      },
+      "event-post-thumb": {
+        "file": "Mossos-dEsquadra-Gerard-Bosch-3-630x300.jpg",
+        "width": 630,
+        "height": 300,
+        "mime_type": "image/jpeg",
+        "source_url": "https://www.efmr.cat/wp-content/uploads/2019/02/Mossos-dEsquadra-Gerard-Bosch-3-630x300.jpg"
+      },
+      "event-post-thumb-box": {
+        "file": "Mossos-dEsquadra-Gerard-Bosch-3-300x240.jpg",
+        "width": 300,
+        "height": 240,
+        "mime_type": "image/jpeg",
+        "source_url": "https://www.efmr.cat/wp-content/uploads/2019/02/Mossos-dEsquadra-Gerard-Bosch-3-300x240.jpg"
+      },
+      "post-thumbnail": {
+        "file": "Mossos-dEsquadra-Gerard-Bosch-3-200x200.jpg",
+        "width": 200,
+        "height": 200,
+        "mime_type": "image/jpeg",
+        "source_url": "https://www.efmr.cat/wp-content/uploads/2019/02/Mossos-dEsquadra-Gerard-Bosch-3-200x200.jpg"
+      },
+      "barcelona-sq": {
+        "file": "Mossos-dEsquadra-Gerard-Bosch-3-400x400.jpg",
+        "width": 400,
+        "height": 400,
+        "mime_type": "image/jpeg",
+        "source_url": "https://www.efmr.cat/wp-content/uploads/2019/02/Mossos-dEsquadra-Gerard-Bosch-3-400x400.jpg"
+      },
+      "barcelona-xs": {
+        "file": "Mossos-dEsquadra-Gerard-Bosch-3-294x194.jpg",
+        "width": 294,
+        "height": 194,
+        "mime_type": "image/jpeg",
+        "source_url": "https://www.efmr.cat/wp-content/uploads/2019/02/Mossos-dEsquadra-Gerard-Bosch-3-294x194.jpg"
+      },
+      "barcelona-sm": {
+        "file": "Mossos-dEsquadra-Gerard-Bosch-3-384x253.jpg",
+        "width": 384,
+        "height": 253,
+        "mime_type": "image/jpeg",
+        "source_url": "https://www.efmr.cat/wp-content/uploads/2019/02/Mossos-dEsquadra-Gerard-Bosch-3-384x253.jpg"
+      },
+      "barcelona-md": {
+        "file": "Mossos-dEsquadra-Gerard-Bosch-3-768x506.jpg",
+        "width": 768,
+        "height": 506,
+        "mime_type": "image/jpeg",
+        "source_url": "https://www.efmr.cat/wp-content/uploads/2019/02/Mossos-dEsquadra-Gerard-Bosch-3-768x506.jpg"
+      },
+      "barcelona-lg": {
+        "file": "Mossos-dEsquadra-Gerard-Bosch-3-1152x759.jpg",
+        "width": 1152,
+        "height": 759,
+        "mime_type": "image/jpeg",
+        "source_url": "https://www.efmr.cat/wp-content/uploads/2019/02/Mossos-dEsquadra-Gerard-Bosch-3-1152x759.jpg"
+      },
+      "barcelona-md-vertical": {
+        "file": "Mossos-dEsquadra-Gerard-Bosch-3-336x450.jpg",
+        "width": 336,
+        "height": 450,
+        "mime_type": "image/jpeg",
+        "source_url": "https://www.efmr.cat/wp-content/uploads/2019/02/Mossos-dEsquadra-Gerard-Bosch-3-336x450.jpg"
+      },
+      "barcelona-full": {
+        "file": "Mossos-dEsquadra-Gerard-Bosch-3-1440x960.jpg",
+        "width": 1440,
+        "height": 960,
+        "mime_type": "image/jpeg",
+        "source_url": "https://www.efmr.cat/wp-content/uploads/2019/02/Mossos-dEsquadra-Gerard-Bosch-3-1440x960.jpg"
+      },
+      "full": {
+        "file": "Mossos-dEsquadra-Gerard-Bosch-3.jpg",
+        "width": 2000,
+        "height": 1333,
+        "mime_type": "image/jpeg",
+        "source_url": "https://www.efmr.cat/wp-content/uploads/2019/02/Mossos-dEsquadra-Gerard-Bosch-3.jpg"
+      }
+    },
+    "image_meta": {
+      "aperture": "8",
+      "credit": "",
+      "camera": "Canon EOS 70D",
+      "caption": "",
+      "created_timestamp": "1508669273",
+      "copyright": "",
+      "focal_length": "18",
+      "iso": "100",
+      "shutter_speed": "0.00625",
+      "title": "",
+      "orientation": "1",
+      "keywords": []
+    }
+  },
+  "source_url": "https://www.efmr.cat/wp-content/uploads/2019/02/Mossos-dEsquadra-Gerard-Bosch-3.jpg",
+  "_links": {
+    "self": [{ "href": "https://www.efmr.cat/wp-json/wp/v2/media/42627" }],
+    "collection": [{ "href": "https://www.efmr.cat/wp-json/wp/v2/media" }],
+    "about": [
+      { "href": "https://www.efmr.cat/wp-json/wp/v2/types/attachment" }
+    ],
+    "author": [
+      {
+        "embeddable": true,
+        "href": "https://www.efmr.cat/wp-json/wp/v2/users/4"
+      }
+    ],
+    "replies": [
+      {
+        "embeddable": true,
+        "href": "https://www.efmr.cat/wp-json/wp/v2/comments?post=42627"
+      }
+    ]
+  }
+}

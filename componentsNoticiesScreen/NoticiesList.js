@@ -83,7 +83,11 @@ const NoticiesList = observer(({ navigation }) => {
   if (noticies.noticies == null) {
     return (
       <View style={styles.page}>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator
+          size="large"
+          color="#3B0D11"
+          style={styles.activityIndicator}
+        />
       </View>
     );
   } else if (noticies.noticies[9].media == null) {
@@ -161,6 +165,11 @@ const NoticiesList = observer(({ navigation }) => {
 export default NoticiesList;
 
 const styles = StyleSheet.create({
+  activityIndicator: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   page: {
     flex: 1,
     paddingTop: 24,

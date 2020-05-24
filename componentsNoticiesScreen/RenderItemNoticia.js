@@ -2,18 +2,19 @@ import React from "react";
 import { Image, StyleSheet, Text, View, ActivityIndicator } from "react-native";
 import { Entities } from "html-entities";
 
-
 const RenderItemNoticia = ({ title, date, categories, media }) => {
-  const Entities = require('html-entities').AllHtmlEntities;
+  const Entities = require("html-entities").AllHtmlEntities;
   const entities = new Entities();
-  
 
   title.rendered = entities.decode(title.rendered);
-  
+
   if (media == null) {
     return (
       <View style={styles.itemLlistaNoticies}>
-        <ActivityIndicator size="large" />
+        <View style={styles.itemLlistaNoticiesImatge}>
+          <ActivityIndicator size="large" color="#3B0D11" style={styles.activityIndicator}/>
+        </View>
+
         <View style={styles.itemLlistaNoticiesCol}>
           <Text style={{ fontWeight: "bold" }}>{title.rendered}</Text>
           <View style={styles.itemLlistaNoticiesSeccio}>
@@ -50,7 +51,10 @@ const RenderItemNoticia = ({ title, date, categories, media }) => {
         <View style={styles.itemLlistaNoticies}>
           <Image
             style={styles.itemLlistaNoticiesImatge}
-            source={{ uri: "https://escuelaeuropea.org/sites/default/files/inline-images/no_image_available_web_0.jpeg" }}
+            source={{
+              uri:
+                "https://escuelaeuropea.org/sites/default/files/inline-images/no_image_available_web_0.jpeg",
+            }}
           ></Image>
           <View style={styles.itemLlistaNoticiesCol}>
             <Text style={{ fontWeight: "bold" }}>{title.rendered}</Text>
@@ -73,10 +77,18 @@ const RenderItemNoticia = ({ title, date, categories, media }) => {
 export default RenderItemNoticia;
 
 const styles = StyleSheet.create({
+  activityIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    
+ },
   itemLlistaNoticies: {
     flex: 1,
     flexDirection: "row",
     flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "center",
     //padding: 5,
   },
   itemLlistaNoticiesImatge: {
