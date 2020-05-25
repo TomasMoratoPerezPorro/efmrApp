@@ -1,73 +1,57 @@
 import React from "react";
 import { Image, StyleSheet, Text, View, ActivityIndicator } from "react-native";
-import { AllHtmlEntities } from 'html-entities';
+import { AllHtmlEntities } from "html-entities";
 
-const RenderItemNoticia = ({ title, date, categories, media }) => {
-  const entities = new AllHtmlEntities();
-
-  title.rendered = entities.decode(title.rendered);
-
+const RenderItemNoticiaImatge = ({ media }) => {
   if (media == null) {
     return (
-      <View style={styles.itemLlistaNoticies}>
-        <View style={styles.itemLlistaNoticiesImatge}>
-          <ActivityIndicator size="large" color="#3B0D11" style={styles.activityIndicator}/>
-        </View>
-
-        <View style={styles.itemLlistaNoticiesCol}>
-          <Text style={{ fontWeight: "bold" }}>{title.rendered}</Text>
-          <View style={styles.itemLlistaNoticiesSeccio}>
-            <Text style={styles.itemLlistaNoticiesSeccioText}>
-              {categories[0]}
-            </Text>
-          </View>
-          <Text style={{ fontSize: 10 }}>{date}</Text>
-        </View>
+      <View style={styles.itemLlistaNoticiesImatge}>
+        <ActivityIndicator
+          size="large"
+          color="#3B0D11"
+          style={styles.activityIndicator}
+        />
       </View>
     );
   } else {
     try {
       return (
-        <View style={styles.itemLlistaNoticies}>
-          <Image
-            style={styles.itemLlistaNoticiesImatge}
-            source={{ uri: media.media_details.sizes.thumbnail.source_url }}
-          ></Image>
-          <View style={styles.itemLlistaNoticiesCol}>
-            <Text style={{ fontWeight: "bold" }}>{title.rendered}</Text>
-            <View style={styles.itemLlistaNoticiesSeccio}>
-              <Text style={styles.itemLlistaNoticiesSeccioText}>
-                {categories[0]}
-              </Text>
-            </View>
-            <Text style={{ fontSize: 10 }}>{date}</Text>
-          </View>
-        </View>
+        <Image
+          style={styles.itemLlistaNoticiesImatge}
+          source={{ uri: media.media_details.sizes.thumbnail.source_url }}
+        ></Image>
       );
-    } catch (err) {
-      console.log(title + "----ERROR----\n" + err);
+    } catch (e) {
       return (
-        <View style={styles.itemLlistaNoticies}>
-          <Image
-            style={styles.itemLlistaNoticiesImatge}
-            source={{
-              uri:
-                "https://escuelaeuropea.org/sites/default/files/inline-images/no_image_available_web_0.jpeg",
-            }}
-          ></Image>
-          <View style={styles.itemLlistaNoticiesCol}>
-            <Text style={{ fontWeight: "bold" }}>{title.rendered}</Text>
-            <View style={styles.itemLlistaNoticiesSeccio}>
-              <Text style={styles.itemLlistaNoticiesSeccioText}>
-                {categories[0]}
-              </Text>
-            </View>
-            <Text style={{ fontSize: 10 }}>{date}</Text>
-          </View>
-        </View>
+        <Image
+          style={styles.itemLlistaNoticiesImatge}
+          source={{
+            uri:
+              "https://escuelaeuropea.org/sites/default/files/inline-images/no_image_available_web_0.jpeg",
+          }}
+        ></Image>
       );
     }
   }
+};
+
+const RenderItemNoticia = ({ title, date, categories, media }) => {
+  const entities = new AllHtmlEntities();
+  title.rendered = entities.decode(title.rendered);
+  return (
+    <View style={styles.itemLlistaNoticies}>
+      <RenderItemNoticiaImatge media={media} />
+      <View style={styles.itemLlistaNoticiesCol}>
+        <Text style={{ fontWeight: "bold" }}>{title.rendered}</Text>
+        <View style={styles.itemLlistaNoticiesSeccio}>
+          <Text style={styles.itemLlistaNoticiesSeccioText}>
+            {categories[0]}
+          </Text>
+        </View>
+        <Text style={{ fontSize: 10 }}>{date}</Text>
+      </View>
+    </View>
+  );
 };
 
 /* media.media_details.sizes.thumbnail.source_url */
@@ -78,10 +62,9 @@ export default RenderItemNoticia;
 const styles = StyleSheet.create({
   activityIndicator: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    
- },
+    justifyContent: "center",
+    alignItems: "center",
+  },
   itemLlistaNoticies: {
     flex: 1,
     flexDirection: "row",
