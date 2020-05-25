@@ -10,10 +10,9 @@ import AudiosScreen from "./screens/AudiosScreen";
 import ContacteDetailScreen from "./screens/ContacteDetailScreen";
 import NoticiaDetailsScreen from "./screens/NoticiaDetailsScreen";
 import NoticiesScreen from "./screens/NoticiesScreen";
-import {NoticiesProvider} from "./model/NoticiesModel";
-import {useFonts} from '@use-expo/font';
-
-
+import { NoticiesProvider } from "./model/NoticiesModel";
+import { useFonts } from "@use-expo/font";
+import "mobx-react-lite/batchingForReactNative";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -21,7 +20,7 @@ const Tab = createMaterialTopTabNavigator();
 const HomePage = ({ navigation }) => {
   // c) amb 'useSafeArea' obtenim els "insets" de cada costat
   const insets = useSafeArea();
-  // <NumberList length={40} /> 
+  // <NumberList length={40} />
   return (
     <View style={[styles.homePage, { paddingTop: 1 }]}>
       <Tab.Navigator
@@ -55,39 +54,46 @@ export default function App() {
 
   if (!fontsLoaded) {
     return (
-    <View style={styles.homePage}>
-      <ActivityIndicator />
-    </View>
+      <View style={styles.homePage}>
+        <ActivityIndicator />
+      </View>
     );
- 
   }
 
   return (
     <NoticiesProvider>
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <Stack.Navigator 
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: "#3B0D11",
-            },
-            headerTintColor: "#fff",
-            headerTitleStyle: {
-              fontWeight: "normal",
-            },
-          }}
-        >
-          <Stack.Screen name="EFMR" component={HomePage}/>
-          <Stack.Screen name="NoticiaScreen" component={NoticiaDetailsScreen} style={styles.typo}/>
-          <Stack.Screen name="AudioScreen" component={AudioDetailScreen} style={styles.typo}/>
-          <Stack.Screen
-            name="ContacteScreen"
-            component={ContacteDetailScreen}
-            style={styles.typo}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaProvider>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: "#3B0D11",
+              },
+              headerTintColor: "#fff",
+              headerTitleStyle: {
+                fontWeight: "normal",
+              },
+            }}
+          >
+            <Stack.Screen name="EFMR" component={HomePage} />
+            <Stack.Screen
+              name="NoticiaScreen"
+              component={NoticiaDetailsScreen}
+              style={styles.typo}
+            />
+            <Stack.Screen
+              name="AudioScreen"
+              component={AudioDetailScreen}
+              style={styles.typo}
+            />
+            <Stack.Screen
+              name="ContacteScreen"
+              component={ContacteDetailScreen}
+              style={styles.typo}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
     </NoticiesProvider>
   );
 }
@@ -103,5 +109,4 @@ const styles = StyleSheet.create({
     fontFamily: "Rajdhani-Regular",
     fontSize: 20,
   },
-  
 });
