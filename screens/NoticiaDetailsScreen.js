@@ -70,7 +70,7 @@ const BgImage = ({ mediaId }) => {
 
   useEffect(() => {
     loadMediaDetails();
-  }, [id]);
+  }, [mediaId]);
 
   if (mediaDetails === "loading") {
     return (
