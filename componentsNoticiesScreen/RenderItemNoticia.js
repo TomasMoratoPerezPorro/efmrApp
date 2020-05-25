@@ -1,10 +1,10 @@
 import React from "react";
 import { Image, StyleSheet, Text, View, ActivityIndicator } from "react-native";
 import { Entities } from "html-entities";
+import { AllHtmlEntities } from 'html-entities';
 
 const RenderItemNoticia = ({ title, date, categories, media }) => {
-  const Entities = require("html-entities").AllHtmlEntities;
-  const entities = new Entities();
+  const entities = new AllHtmlEntities();
 
   title.rendered = entities.decode(title.rendered);
 
