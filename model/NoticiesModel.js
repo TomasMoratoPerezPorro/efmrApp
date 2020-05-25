@@ -69,6 +69,7 @@ class NoticiesModel {
     });
   }
 
+  /*
   @action async loadMedia() {
     await myForEach(this.noticies, async (noticia) => {
       var idmedia = noticia.featured_media;
@@ -86,6 +87,7 @@ class NoticiesModel {
       }
     });
   }
+  */
 }
 
 const model = new NoticiesModel();

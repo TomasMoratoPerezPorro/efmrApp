@@ -76,6 +76,7 @@ const fakeNoticia = {
 
 const NoticiesList = observer(({ navigation }) => {
   const noticies = useContext(NoticiesContext);
+
   useEffect(() => {
     noticies.loadNoticies();
   }, []);
@@ -91,7 +92,7 @@ const NoticiesList = observer(({ navigation }) => {
       </View>
     );
   } else if (noticies.noticies[9].media == null) {
-    noticies.loadMedia();
+    // noticies.loadMedia();
 
     return (
       <FlatList
@@ -125,7 +126,7 @@ const NoticiesList = observer(({ navigation }) => {
         )}
         keyExtractor={(noticia) => noticia.id.toString()}
         ItemSeparatorComponent={Separator}
-      ></FlatList>
+      />
     );
   }
 });
