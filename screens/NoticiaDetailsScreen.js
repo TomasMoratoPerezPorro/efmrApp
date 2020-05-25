@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import {
   Button,
   ImageBackground,
@@ -6,6 +6,8 @@ import {
   StyleSheet,
   Text,
   View,
+  ActivityIndicator,
+  Image,
 } from "react-native";
 import { SocialIcon } from "react-native-elements";
 import HTMLView from "react-native-htmlview";
@@ -18,7 +20,8 @@ function NoticiaDetailsScreen({ route, navigation }) {
   const { itemContent } = route.params;
   const { itemExcerpt } = route.params;
   const { itemAuthor } = route.params;
-  const { itemMedia } = route.params;
+  const {itemMedia} = route.params;
+
   /* console.log(itemTitle);  */
   return (
     <NoticiaContext.Provider
@@ -28,7 +31,7 @@ function NoticiaDetailsScreen({ route, navigation }) {
         content: itemContent,
         Excerpt: itemExcerpt,
         author: itemAuthor,
-        media: itemMedia,
+        mediaId: itemMedia,
       }}
     >
       <ScrollView style={styles.page}>
@@ -49,8 +52,64 @@ const VerticalSep = () => (
   />
 );
 
-const BgImage = () => {
-  const Noticia = useContext(NoticiaContext);
+const BgImage = ({ mediaId }) => {
+  const [mediaDetails, setMediaDetails] = useState("loading");
+
+  const loadMediaDetails = async () => {
+    try {
+      setMediaDetails("loading");
+      const responseMedia = await fetch(
+        `https://www.efmr.cat/wp-json/wp/v2/media/${mediaId}?_fields=id,source_url,media_details`
+      );
+      const jsonmedia = await responseMedia.json();
+      setMediaDetails(jsonmedia.media_details);
+    } catch (e) {
+      setMediaDetails("error");
+    }
+  };
+
+  useEffect(() => {
+    loadMediaDetails();
+  }, [id]);
+
+  if (mediaDetails === "loading") {
+    return (
+      <View style={styles.header}>
+        <ActivityIndicator
+          size="large"
+          color="#3B0D11"
+          style={styles.activityIndicator}
+        />
+      </View>
+    );
+  }
+
+  if (
+    mediaDetails == "error" ||
+    !mediaDetails ||
+    !mediaDetails.sizes ||
+    !mediaDetails.sizes.medium_large
+  ) {
+    return (
+      <ImageBackground
+        style={styles.header}
+        source={{
+          uri:
+            "https://escuelaeuropea.org/sites/default/files/inline-images/no_image_available_web_0.jpeg",
+        }}
+      ></ImageBackground>
+    );
+  }
+  return (
+    <ImageBackground
+      style={styles.header}
+      source={{
+        uri: mediaDetails.sizes.medium_large.source_url,
+      }}
+    ></ImageBackground>
+  );
+
+  /* const Noticia = useContext(NoticiaContext);
   try {
     return (
       <ImageBackground
@@ -70,7 +129,7 @@ const BgImage = () => {
         }}
       ></ImageBackground>
     );
-  }
+  } */
 };
 
 const About = () => {
@@ -78,7 +137,7 @@ const About = () => {
 
   return (
     <View style={styles.about}>
-      <BgImage></BgImage>
+      <BgImage mediaId={Noticia.mediaId}></BgImage>
 
       <View style={styles.stats}>
         <View style={styles.statsCol}>
@@ -200,6 +259,11 @@ var htmlstyles = StyleSheet.create({
 });
 
 const styles = StyleSheet.create({
+  activityIndicator: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   page: {
     flex: 1,
     backgroundColor: "white",
@@ -209,7 +273,7 @@ const styles = StyleSheet.create({
     height: 200,
     justifyContent: "flex-end",
     alignItems: "center",
-    backgroundColor: "red",
+    //backgroundColor: "red",
     paddingBottom: 20,
   },
   stats: {

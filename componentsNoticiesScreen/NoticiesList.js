@@ -91,17 +91,6 @@ const NoticiesList = observer(({ navigation }) => {
         />
       </View>
     );
-  } else if (noticies.noticies[9].media == null) {
-    // noticies.loadMedia();
-
-    return (
-      <FlatList
-        data={noticies.noticies}
-        renderItem={({ item }) => <RenderItemNoticia {...item} />}
-        keyExtractor={(noticia) => noticia.id.toString()}
-        ItemSeparatorComponent={Separator}
-      ></FlatList>
-    );
   } else {
     return (
       <FlatList
@@ -117,7 +106,7 @@ const NoticiesList = observer(({ navigation }) => {
                 itemContent: item.content,
                 itemExcerpt: item.excerpt,
                 itemAuthor: item.author,
-                itemMedia: item.media,
+                itemMedia: item.featured_media,
               });
             }}
           >
