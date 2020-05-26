@@ -31,7 +31,10 @@
     "react-native-screens": "~2.2.0",
     "react-native-tab-view": "^2.14.0",
     "react-native-web": "~0.11.7",
-    "top-bar-nav": "^1.2.2"
+    "top-bar-nav": "^1.2.2",
+    "@react-native-community/audio-toolkit": "^2.0.3",
+    "@react-native-community/slider": "^1.1.4",
+    "expo-av": "~8.1.0"
   },
   "devDependencies": {
     "babel-preset-expo": "~8.1.0",

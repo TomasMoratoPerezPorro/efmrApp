@@ -2,17 +2,20 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, ActivityIndicator } from "react-native";
+import { StyleSheet, View, ActivityIndicator, AppRegistry } from "react-native";
 import "react-native-gesture-handler";
 import { SafeAreaProvider, useSafeArea } from "react-native-safe-area-context";
 import AudioDetailScreen from "./screens/AudioDetailScreen";
 import AudiosScreen from "./screens/AudiosScreen";
 import ContacteDetailScreen from "./screens/ContacteDetailScreen";
 import NoticiaDetailsScreen from "./screens/NoticiaDetailsScreen";
+import AudioPlayerTestScreen from "./screens/AudioPlayerTestScreen";
 import NoticiesScreen from "./screens/NoticiesScreen";
 import { NoticiesProvider } from "./model/NoticiesModel";
 import { useFonts } from "@use-expo/font";
 import "mobx-react-lite/batchingForReactNative";
+
+
 
 const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
@@ -87,6 +90,11 @@ export default function App() {
               style={styles.typo}
             />
             <Stack.Screen
+              name="AudioPlayerTestScreen"
+              component={AudioPlayerTestScreen}
+              style={styles.typo}
+            />
+            <Stack.Screen
               name="ContacteScreen"
               component={ContacteDetailScreen}
               style={styles.typo}
@@ -97,6 +105,8 @@ export default function App() {
     </NoticiesProvider>
   );
 }
+
+
 
 const styles = StyleSheet.create({
   homePage: {

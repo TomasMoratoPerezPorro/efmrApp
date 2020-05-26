@@ -51,6 +51,16 @@ const AudiosScreen = ({ navigation }) => {
           });
         }}
       />
+      <Button
+        title="Pagina Prova audio player"
+        onPress={() => {
+          navigation.navigate("AudioPlayerTestScreen", {
+            imatges: ImgAudio,
+            dadesAudio: TextAudio,
+            ultimsAudios: Ultimsaudios,
+          });
+        }}
+      />
       <UltimsAudiosList></UltimsAudiosList>
       <ButtonMesAudios></ButtonMesAudios>
       <InformatiuConca></InformatiuConca>

@@ -51,7 +51,7 @@ const NoticiaMesLlegida = observer(({ navigation }) => {
                 itemContent: noticies.noticiaMesLlegida.content,
                 itemExcerpt: noticies.noticiaMesLlegida.excerpt,
                 itemAuthor: noticies.noticiaMesLlegida.author,
-                itemMedia: noticies.noticiaMesLlegida.media,
+                itemMedia: noticies.noticiaMesLlegida.featured_media,
               });
             }}
           >
