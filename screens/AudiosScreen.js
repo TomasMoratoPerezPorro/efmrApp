@@ -5,6 +5,7 @@ import AudioMesVist from "../componentsAudioScreen/AudioMesVist";
 import ButtonMesAudios from "../componentsAudioScreen/ButtonMesAudios";
 import InformatiuConca from "../componentsAudioScreen/InformatiuConca";
 import UltimsAudiosList from "../componentsAudioScreen/UltimsAudiosList";
+import SeparadorPortada from "../componentsNoticiesScreen/SeparadorPortada";
 //COMPONENTS
 import UltimsProgrames from "../componentsAudioScreen/UltimsProgrames";
 
@@ -61,6 +62,7 @@ const AudiosScreen = ({ navigation }) => {
           });
         }}
       />
+      <SeparadorPortada text={"ÚLTIMS AUDIOS"}></SeparadorPortada>
       <UltimsAudiosList></UltimsAudiosList>
       <ButtonMesAudios></ButtonMesAudios>
       <InformatiuConca></InformatiuConca>

@@ -12,6 +12,16 @@ class NoticiesModel {
   @observable noticiaMesLlegida = null;
   @observable noticiesPortada = null;
   @observable noticiaMesLlegidaMediaFlag = false;
+  @observable ultimsAudios = null;
+
+
+  @action async loadUltimsAudios() {
+    const response = await fetch(
+      "https://www.efmr.cat/wp-json/wp/v2/posts?categories=18&per_page=10&_fields=id,date,title,content,excerpt,author,featured_media,categories"
+    );
+    const json = await response.json();
+    this.ultimsAudios = json;
+  }
 
   @action async loadNoticies() {
     const response = await fetch(

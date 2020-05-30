@@ -20,14 +20,6 @@ const numColumns = 2;
 const screenWidth = Dimensions.get("window").width;
 const photoSize = Math.floor(screenWidth / numColumns);
 
-class Icon {
-  constructor(module, width, height) {
-    this.module = module;
-    this.width = width;
-    this.height = height;
-    Asset.fromModule(this.module).downloadAsync();
-  }
-}
 
 class PlaylistItem {
   constructor(name, uri, isVideo) {
@@ -67,9 +59,9 @@ const PLAYLIST = [
 
 
 
-const ICON_TRACK_1 = new Icon(require("../assets/images/track_1.png"), 166, 5);
+/* const ICON_TRACK_1 = new Icon(require("../assets/images/track_1.png"), 166, 5);
 const ICON_THUMB_1 = new Icon(require("../assets/images/thumb_1.png"), 18, 19);
-const ICON_THUMB_2 = new Icon(require("../assets/images/thumb_2.png"), 15, 19);
+const ICON_THUMB_2 = new Icon(require("../assets/images/thumb_2.png"), 15, 19); */
 
 
 
@@ -489,7 +481,7 @@ class AudioComponent extends React.Component {
             },
           ]}
         >
-          <Slider
+          {/* <Slider
             style={styles.playbackSlider}
             trackImage={ICON_TRACK_1.module}
             thumbImage={ICON_THUMB_1.module}
@@ -497,7 +489,7 @@ class AudioComponent extends React.Component {
             onValueChange={this._onSeekSliderValueChange}
             onSlidingComplete={this._onSeekSliderSlidingComplete}
             disabled={this.state.isLoading}
-          />
+          /> */}
           <View style={styles.timestampRow}>
             <Text
               style={[
@@ -812,8 +804,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     alignSelf: "stretch",
-    minHeight: ICON_THUMB_1.height * 2.0,
-    maxHeight: ICON_THUMB_1.height * 2.0,
+    /* minHeight: ICON_THUMB_1.height * 2.0,
+    maxHeight: ICON_THUMB_1.height * 2.0, */
   },
   playbackSlider: {
     alignSelf: "stretch",
@@ -856,7 +848,7 @@ const styles = StyleSheet.create({
   
   
   buttonsContainerBottomRow: {
-    maxHeight: ICON_THUMB_1.height,
+    maxHeight: 80,
     alignSelf: "stretch",
     paddingRight: 20,
     paddingLeft: 20,

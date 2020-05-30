@@ -1,5 +1,16 @@
-import React from "react";
-import { Dimensions, FlatList, Image, StyleSheet, Text, View } from "react-native";
+import React, { useContext, useEffect } from "react";
+import { observer } from "mobx-react";
+import {
+  Dimensions,
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  ActivityIndicator
+} from "react-native";
+import { NoticiesContext } from "../model/NoticiesModel";
+import RenderItemUltimsAudios from "../componentsAudioScreen/RenderItemUltimsAudios";
 
 const numColumns = 2;
 const screenWidth = Dimensions.get("window").width;
@@ -28,46 +39,50 @@ const fakeAudiosList = [
   },
 ];
 
-const UltimsAudiosItem = ({ text, img }) => {
-  return (
-    <View>
-      <View>
-        <View style={styles.viewTot}>
-          <Image
-            style={styles.photo}
-            source={{
-              uri: img,
-            }}
-          />
-          <Text style={styles.textsota}>{text}</Text>
-        </View>
-      </View>
-    </View>
-  );
-};
 
-const UltimsAudiosList = () => {
-  return (
-    <View>
-      <View>
-        <Text style={styles.textsota}>ÚLTIMS ÀUDIOS</Text>
-      </View>
 
-      <FlatList
-        data={fakeAudiosList}
-        numColumns={numColumns}
-        keyExtractor={(audio) => audio.text}
-        renderItem={({ item }) => <UltimsAudiosItem {...item} />}
-      />
-    </View>
-  );
-};
+const UltimsAudiosList = observer(({ navigation }) => {
+  const audios = useContext(NoticiesContext);
+  useEffect(() => {
+    audios.loadUltimsAudios();
+  }, []);
+
+  if (audios.ultimsAudios == null) {
+    return (
+      <View style={styles.page}>
+        <ActivityIndicator
+          size="large"
+          color="#3B0D11"
+          style={styles.activityIndicator}
+        />
+      </View>
+    );
+  } else {
+    return (
+      <View>
+        <FlatList
+          data={audios.ultimsAudios}
+          numColumns={numColumns}
+          keyExtractor={(audio) => audio.id.toString()}
+          renderItem={({ item }) => <RenderItemUltimsAudios {...item} />}
+        />
+      </View>
+    );
+  }
+});
 
 export default UltimsAudiosList;
 
 const styles = StyleSheet.create({
+  page: {
+    flex: 1,
+    paddingTop: 24,
+    backgroundColor: "#fff",
+    alignItems: "stretch",
+    justifyContent: "center",
+  },
   photo: {
-    width: photoSize,
+    width: screenWidth/2,
     height: 120,
     borderWidth: 1,
     borderColor: "white",
@@ -79,7 +94,7 @@ const styles = StyleSheet.create({
   },
 
   viewTot: {
-    width: photoSize,
+    width: screenWidth/2,
     paddingTop: 15,
   },
 });
