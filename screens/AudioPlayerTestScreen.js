@@ -86,7 +86,6 @@ const AudioProfile = () => {
 };
 
 class AudioComponent extends React.Component {
-    _isMounted = false;
   constructor(props) {
     super(props);
     this.index = 0;
@@ -114,12 +113,13 @@ class AudioComponent extends React.Component {
       useNativeControls: false,
       fullscreen: false,
       throughEarpiece: false,
-      
     };
+
+    // volem saber si el component està muntat per no cridar setState
+    this._isMounted = true;
   }
 
   componentDidMount() {
-      
     Audio.setAudioModeAsync({
       allowsRecordingIOS: false,
       staysActiveInBackground: false,
@@ -136,6 +136,16 @@ class AudioComponent extends React.Component {
       });
       this.setState({ fontLoaded: true });
     })();
+  }
+
+  setState(...args) {
+    if (this._isMounted) {
+      super.setState(...args);
+    }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   async _loadNewPlaybackInstance(playing) {
