@@ -74,6 +74,26 @@ const VerticalSep = () => (
   />
 );
 
+const FooterFoto = ({ author, caption }) => {
+  return (
+    <View style={styles.stats}>
+      <View style={styles.statsCol}>
+        {/* <Text >{caption.rendered}</Text> */}
+        <View style={styles.statsHeader}>
+          <HTMLView
+            value={`<div>${caption.rendered.replace(
+              /(\r\n|\n|\r)/gm,
+              ""
+            )}</div>`}
+            stylesheet={htmlstyles_footer}
+          />
+        </View>
+      </View>
+      <VerticalSep />
+    </View>
+  );
+};
+
 const BgImage = ({ mediaId }) => {
   const [mediaDetails, setMediaDetails] = useState("loading");
 
@@ -81,10 +101,10 @@ const BgImage = ({ mediaId }) => {
     try {
       setMediaDetails("loading");
       const responseMedia = await fetch(
-        `https://www.efmr.cat/wp-json/wp/v2/media/${mediaId}?_fields=id,source_url,media_details`
+        `https://www.efmr.cat/wp-json/wp/v2/media/${mediaId}?_fields=id,source_url,media_details,caption,author`
       );
       const jsonmedia = await responseMedia.json();
-      setMediaDetails(jsonmedia.media_details);
+      setMediaDetails(jsonmedia);
     } catch (e) {
       setMediaDetails("error");
     }
@@ -108,9 +128,9 @@ const BgImage = ({ mediaId }) => {
 
   if (
     mediaDetails == "error" ||
-    !mediaDetails ||
-    !mediaDetails.sizes ||
-    !mediaDetails.sizes.medium_large
+    !mediaDetails.media_details ||
+    !mediaDetails.media_details.sizes ||
+    !mediaDetails.media_details.sizes.medium_large
   ) {
     return (
       <ImageBackground
@@ -123,35 +143,21 @@ const BgImage = ({ mediaId }) => {
     );
   }
   return (
-    <ImageBackground
-      style={styles.header}
-      source={{
-        uri: mediaDetails.sizes.medium_large.source_url,
-      }}
-    ></ImageBackground>
+    <View>
+      <ImageBackground
+        style={styles.header}
+        source={{
+          uri: mediaDetails.media_details.sizes.medium_large.source_url,
+        }}
+      ></ImageBackground>
+      <FooterFoto
+        author={mediaDetails.author}
+        caption={mediaDetails.caption}
+      ></FooterFoto>
+    </View>
   );
 
-  /* const Noticia = useContext(NoticiaContext);
-  try {
-    return (
-      <ImageBackground
-        style={styles.header}
-        source={{
-          uri: Noticia.media.media_details.sizes.medium_large.source_url,
-        }}
-      ></ImageBackground>
-    );
-  } catch {
-    return (
-      <ImageBackground
-        style={styles.header}
-        source={{
-          uri:
-            "https://escuelaeuropea.org/sites/default/files/inline-images/no_image_available_web_0.jpeg",
-        }}
-      ></ImageBackground>
-    );
-  } */
+  
 };
 
 const About = () => {
@@ -160,18 +166,6 @@ const About = () => {
   return (
     <View style={styles.about}>
       <BgImage mediaId={Noticia.mediaId}></BgImage>
-
-      <View style={styles.stats}>
-        <View style={styles.statsCol}>
-          <Text style={styles.statsHeader}>
-            Zona afectada per la riuada del 2019
-          </Text>
-        </View>
-        <VerticalSep />
-        <View style={styles.statsCol}>
-          <Text style={styles.statsHeader}>Imatge: Pep Morató</Text>
-        </View>
-      </View>
 
       <View style={styles.aboutInner}>
         <Text style={styles.aboutTitle}>{Noticia.title.rendered}</Text>
@@ -261,6 +255,13 @@ var htmlstyles = StyleSheet.create({
   },
 });
 
+var htmlstyles_footer = StyleSheet.create({
+  p: {
+    fontSize: 13,
+    color: "#0008",
+  },
+});
+
 const styles = StyleSheet.create({
   activityIndicator: {
     flex: 1,
@@ -283,8 +284,8 @@ const styles = StyleSheet.create({
     height: 30,
     backgroundColor: "#ccc",
     flexDirection: "row",
-    justifyContent: "space-evenly",
-    alignItems: "stretch",
+    justifyContent: "flex-end",
+    alignItems: "center",
   },
   statsCol: {
     alignItems: "center",
@@ -293,6 +294,7 @@ const styles = StyleSheet.create({
   statsHeader: {
     fontSize: 12,
     color: "#0008",
+    marginRight: 10,
   },
   paragraf: {
     padding: 8,
