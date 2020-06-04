@@ -62,7 +62,7 @@ const NoticiaMesLlegida = observer(({ navigation }) => {
                 </Text>
               </View>
               <View style={styles.NoticiaMesLlegidaFooterColTitular}>
-                <Text style={styles.NoticiaMesLlegidaText}>
+                <Text numberOfLines={2} style={styles.NoticiaMesLlegidaText}>
                   {noticies.noticiaMesLlegida.title.rendered}
                 </Text>
               </View>

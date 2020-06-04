@@ -22,23 +22,11 @@ const CarrousselPortada = observer(({ navigation }) => {
         />
       </View>
     );
-  } else if (noticies.noticiesPortada[4].media == null) {
-    noticies.loadMediaPortada();
-
-    return (
-      <View style={styles.CarrousselItemContainer}>
-        <ActivityIndicator
-          size="large"
-          color="#3B0D11"
-          style={styles.activityIndicator}
-        />
-      </View>
-    );
   } else {
     return (
       <FlatList
         data={noticies.noticiesPortada}
-        keyExtractor={(array) => array.id}
+        keyExtractor={(array) => array.id.toString()}
         renderItem={({ item }) => <CarrousselItem {...item} />}
         horizontal={true}
       ></FlatList>
