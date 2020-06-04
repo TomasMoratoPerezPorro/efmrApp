@@ -20,7 +20,6 @@ const numColumns = 2;
 const screenWidth = Dimensions.get("window").width;
 const photoSize = Math.floor(screenWidth / numColumns);
 
-
 class PlaylistItem {
   constructor(name, uri, isVideo) {
     this.name = name;
@@ -57,13 +56,9 @@ const PLAYLIST = [
   ),
 ];
 
-
-
 /* const ICON_TRACK_1 = new Icon(require("../assets/images/track_1.png"), 166, 5);
 const ICON_THUMB_1 = new Icon(require("../assets/images/thumb_1.png"), 18, 19);
 const ICON_THUMB_2 = new Icon(require("../assets/images/thumb_2.png"), 15, 19); */
-
-
 
 const { width: DEVICE_WIDTH, height: DEVICE_HEIGHT } = Dimensions.get("window");
 const BACKGROUND_COLOR = "#FFF8ED";
@@ -145,13 +140,19 @@ class AudioComponent extends React.Component {
   }
 
   componentWillUnmount() {
+    if (this.playbackInstance != null) {
+      this.playbackInstance.unloadAsync();
+      this.playbackInstance.setOnPlaybackStatusUpdate(null);
+      this.playbackInstance = null;
+    }
+
     this._isMounted = false;
   }
 
   async _loadNewPlaybackInstance(playing) {
     if (this.playbackInstance != null) {
       await this.playbackInstance.unloadAsync();
-      // this.playbackInstance.setOnPlaybackStatusUpdate(null);
+       this.playbackInstance.setOnPlaybackStatusUpdate(null);
       this.playbackInstance = null;
     }
 
@@ -167,20 +168,12 @@ class AudioComponent extends React.Component {
       // androidImplementation: 'MediaPlayer',
     };
 
-    if (PLAYLIST[this.index].isVideo) {
-      console.log(this._onPlaybackStatusUpdate);
-      await this._video.loadAsync(source, initialStatus);
-      // this._video.onPlaybackStatusUpdate(this._onPlaybackStatusUpdate);
-      this.playbackInstance = this._video;
-      const status = await this._video.getStatusAsync();
-    } else {
-      const { sound, status } = await Audio.Sound.createAsync(
-        source,
-        initialStatus,
-        this._onPlaybackStatusUpdate
-      );
-      this.playbackInstance = sound;
-    }
+    const { sound, status } = await Audio.Sound.createAsync(
+      source,
+      initialStatus,
+      this._onPlaybackStatusUpdate
+    );
+    this.playbackInstance = sound;
 
     this._updateScreenForLoading(false);
   }
@@ -271,10 +264,7 @@ class AudioComponent extends React.Component {
     );
   };
 
-  _advanceIndex(forward) {
-    this.index =
-      (this.index + (forward ? 1 : PLAYLIST.length - 1)) % PLAYLIST.length;
-  }
+  
 
   async _updatePlaybackInstanceForIndex(playing) {
     this._updateScreenForLoading(true);
@@ -303,57 +293,17 @@ class AudioComponent extends React.Component {
     }
   };
 
-  _onForwardPressed = () => {
-    if (this.playbackInstance != null) {
-      this._advanceIndex(true);
-      this._updatePlaybackInstanceForIndex(this.state.shouldPlay);
-    }
-  };
+  
 
-  _onBackPressed = () => {
-    if (this.playbackInstance != null) {
-      this._advanceIndex(false);
-      this._updatePlaybackInstanceForIndex(this.state.shouldPlay);
-    }
-  };
+  
 
-  _onMutePressed = () => {
-    if (this.playbackInstance != null) {
-      this.playbackInstance.setIsMutedAsync(!this.state.muted);
-    }
-  };
-
-  _onLoopPressed = () => {
-    if (this.playbackInstance != null) {
-      this.playbackInstance.setIsLoopingAsync(
-        this.state.loopingType !== LOOPING_TYPE_ONE
-      );
-    }
-  };
-
-  _onVolumeSliderValueChange = (value) => {
-    if (this.playbackInstance != null) {
-      this.playbackInstance.setVolumeAsync(value);
-    }
-  };
-
-  _trySetRate = async (rate, shouldCorrectPitch) => {
-    if (this.playbackInstance != null) {
-      try {
-        await this.playbackInstance.setRateAsync(rate, shouldCorrectPitch);
-      } catch (error) {
-        // Rate changing could not be performed, possibly because the client's Android API is too old.
-      }
-    }
-  };
+ 
 
   _onRateSliderSlidingComplete = async (value) => {
     this._trySetRate(value * RATE_SCALE, this.state.shouldCorrectPitch);
   };
 
-  _onPitchCorrectionPressed = async (value) => {
-    this._trySetRate(this.state.rate, !this.state.shouldCorrectPitch);
-  };
+ 
 
   _onSeekSliderValueChange = (value) => {
     if (this.playbackInstance != null && !this.isSeeking) {
@@ -417,38 +367,15 @@ class AudioComponent extends React.Component {
     return "";
   }
 
-  _onPosterPressed = () => {
-    this.setState({ poster: !this.state.poster });
-  };
+  
 
   _onUseNativeControlsPressed = () => {
     this.setState({ useNativeControls: !this.state.useNativeControls });
   };
 
-  _onFullscreenPressed = () => {
-    try {
-      this._video.presentFullscreenPlayer();
-    } catch (error) {
-      console.log(error.toString());
-    }
-  };
+  
 
-  _onSpeakerPressed = () => {
-    this.setState(
-      (state) => {
-        return { throughEarpiece: !state.throughEarpiece };
-      },
-      ({ throughEarpiece }) =>
-        Audio.setAudioModeAsync({
-          allowsRecordingIOS: false,
-          interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
-          playsInSilentModeIOS: true,
-          shouldDuckAndroid: true,
-          interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
-          playThroughEarpieceAndroid: throughEarpiece,
-        })
-    );
-  };
+  
 
   render() {
     return !this.state.fontLoaded ? (
@@ -491,15 +418,13 @@ class AudioComponent extends React.Component {
             },
           ]}
         >
-          {/* <Slider
+          <Slider
             style={styles.playbackSlider}
-            trackImage={ICON_TRACK_1.module}
-            thumbImage={ICON_THUMB_1.module}
             value={this._getSeekSliderPosition()}
             onValueChange={this._onSeekSliderValueChange}
             onSlidingComplete={this._onSeekSliderSlidingComplete}
             disabled={this.state.isLoading}
-          /> */}
+          />
           <View style={styles.timestampRow}>
             <Text
               style={[
@@ -533,14 +458,6 @@ class AudioComponent extends React.Component {
           <TouchableHighlight
             underlayColor={BACKGROUND_COLOR}
             style={styles.wrapper}
-            onPress={this._onBackPressed}
-            disabled={this.state.isLoading}
-          >
-            <MaterialIcons name="fast-rewind" size={40} color="black" />
-          </TouchableHighlight>
-          <TouchableHighlight
-            underlayColor={BACKGROUND_COLOR}
-            style={styles.wrapper}
             onPress={this._onPlayPausePressed}
             disabled={this.state.isLoading}
           >
@@ -553,7 +470,6 @@ class AudioComponent extends React.Component {
               size={40}
               color="black"
             />
-            
           </TouchableHighlight>
           <TouchableHighlight
             underlayColor={BACKGROUND_COLOR}
@@ -563,81 +479,9 @@ class AudioComponent extends React.Component {
           >
             <MaterialIcons name="stop" size={40} color="black" />
           </TouchableHighlight>
-          <TouchableHighlight
-            underlayColor={BACKGROUND_COLOR}
-            style={styles.wrapper}
-            onPress={this._onForwardPressed}
-            disabled={this.state.isLoading}
-          >
-            <MaterialIcons name="fast-forward" size={40} color="black" />
-          </TouchableHighlight>
         </View>
 
         <View />
-        {this.state.showVideo ? (
-          <View>
-            <View
-              style={[
-                styles.buttonsContainerBase,
-                styles.buttonsContainerTextRow,
-              ]}
-            >
-              <View />
-              <TouchableHighlight
-                underlayColor={BACKGROUND_COLOR}
-                style={styles.wrapper}
-                onPress={this._onPosterPressed}
-              >
-                <View style={styles.button}>
-                  <Text
-                    style={[styles.text, { fontFamily: "cutive-mono-regular" }]}
-                  >
-                    Poster: {this.state.poster ? "yes" : "no"}
-                  </Text>
-                </View>
-              </TouchableHighlight>
-              <View />
-              <TouchableHighlight
-                underlayColor={BACKGROUND_COLOR}
-                style={styles.wrapper}
-                onPress={this._onFullscreenPressed}
-              >
-                <View style={styles.button}>
-                  <Text
-                    style={[styles.text, { fontFamily: "cutive-mono-regular" }]}
-                  >
-                    Fullscreen
-                  </Text>
-                </View>
-              </TouchableHighlight>
-              <View />
-            </View>
-            <View style={styles.space} />
-            <View
-              style={[
-                styles.buttonsContainerBase,
-                styles.buttonsContainerTextRow,
-              ]}
-            >
-              <View />
-              <TouchableHighlight
-                underlayColor={BACKGROUND_COLOR}
-                style={styles.wrapper}
-                onPress={this._onUseNativeControlsPressed}
-              >
-                <View style={styles.button}>
-                  <Text
-                    style={[styles.text, { fontFamily: "cutive-mono-regular" }]}
-                  >
-                    Native Controls:{" "}
-                    {this.state.useNativeControls ? "yes" : "no"}
-                  </Text>
-                </View>
-              </TouchableHighlight>
-              <View />
-            </View>
-          </View>
-        ) : null}
       </View>
     );
   }
@@ -850,13 +694,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   buttonsContainerTopRow: {
-    maxHeight:80,
+    maxHeight: 80,
     minWidth: DEVICE_WIDTH / 2.0,
     maxWidth: DEVICE_WIDTH / 2.0,
   },
-  
-  
-  
+
   buttonsContainerBottomRow: {
     maxHeight: 80,
     alignSelf: "stretch",
@@ -869,7 +711,7 @@ const styles = StyleSheet.create({
   buttonsContainerTextRow: {
     maxHeight: 24,
     alignItems: "center",
-    paddingVertical:20,
+    paddingVertical: 20,
     paddingRight: 20,
     paddingLeft: 20,
     minWidth: DEVICE_WIDTH,
