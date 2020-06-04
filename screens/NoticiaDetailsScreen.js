@@ -8,9 +8,31 @@ import {
   View,
   ActivityIndicator,
   Image,
+  Dimensions,
+  PixelRatio,
 } from "react-native";
 import { SocialIcon } from "react-native-elements";
 import HTMLView from "react-native-htmlview";
+
+const { width } = Dimensions.get("window");
+
+function renderNode(node, index, siblings, parent, defaultRenderer) {
+  if (node.name == "img") {
+    const { src, height } = node.attribs;
+    const imageHeight = height || 300;
+    return (
+      <Image
+        key={index}
+        style={{
+          width: 300,
+          height: 150,
+          resizeMode: "cover",
+        }}
+        source={{ uri: src }}
+      />
+    );
+  }
+}
 
 const NoticiaContext = createContext({});
 
@@ -20,7 +42,7 @@ function NoticiaDetailsScreen({ route, navigation }) {
   const { itemContent } = route.params;
   const { itemExcerpt } = route.params;
   const { itemAuthor } = route.params;
-  const {itemMedia} = route.params;
+  const { itemMedia } = route.params;
 
   /* console.log(itemTitle);  */
   return (
@@ -155,7 +177,16 @@ const About = () => {
         <Text style={styles.aboutTitle}>{Noticia.title.rendered}</Text>
         <Text style={styles.redactortitle}>{Noticia.author}</Text>
         {/* <Text style={styles.paragraf}>{Noticia.content.rendered}</Text> */}
-        <HTMLView value={Noticia.content.rendered} stylesheet={htmlstyles} />
+        {/* value={`<div>${data.replace(/(\r\n|\n|\r)/gm, "")}</div>`} */}
+        {/* value={Noticia.content.rendered} */}
+        <HTMLView
+          value={`<div>${Noticia.content.rendered.replace(
+            /(\r\n|\n|\r)/gm,
+            ""
+          )}</div>`}
+          stylesheet={htmlstyles}
+          renderNode={renderNode}
+        />
 
         <View style={styles.redes}>
           <SocialIcon
@@ -204,36 +235,7 @@ const About = () => {
           />
         </View>
 
-        <Text style={styles.similar}>NOTÍCIES SIMILARS</Text>
-
-        <View
-          style={{
-            flex: 1,
-            flexDirection: "row",
-            flexWrap: "wrap",
-          }}
-        >
-          <View style={styles.grid}>
-            <ImageBackground
-              style={styles.imagnoti}
-              source={{ uri: Noticia.imag1 }}
-            ></ImageBackground>
-            <Text style={styles.notitext}>
-              "L’espluguí, Ferran Lozano, participarà en una cursa solidària"
-            </Text>
-          </View>
-
-          <View style={styles.grid}>
-            <ImageBackground
-              style={styles.imagnoti}
-              source={{ uri: Noticia.imag2 }}
-            ></ImageBackground>
-            <Text style={styles.notitext}>
-              "La víctima mortal de l’accident de trànsit de l’Espluga era un
-              ..."
-            </Text>
-          </View>
-        </View>
+        <Text style={styles.similar}>{Noticia.id}</Text>
       </View>
     </View>
   );
@@ -244,17 +246,18 @@ export default NoticiaDetailsScreen;
 var htmlstyles = StyleSheet.create({
   a: {
     fontWeight: "300",
-    fontSize: 12,
+    fontSize: 13,
+    color: "#516bf0",
   },
   p: {
-    fontSize: 12,
+    fontSize: 13,
   },
   strong: {
     fontWeight: "bold",
-    fontSize: 12,
+    fontSize: 13,
   },
   li: {
-    fontSize: 12,
+    fontSize: 13,
   },
 });
 
