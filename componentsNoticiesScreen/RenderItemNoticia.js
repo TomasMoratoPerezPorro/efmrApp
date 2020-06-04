@@ -59,6 +59,45 @@ const _Imatge = ({ id }) => {
   );
 };
 
+function categoria(arrayCategoria) {
+  let idCategoria = null;
+
+  arrayCategoria.forEach((element) => {
+    if (element != 96 && element != 101) {
+      idCategoria = element;
+    }
+  });
+  var StringCategoria = "Categoria";
+  switch (idCategoria) {
+    case 26:
+      StringCategoria = "Cultura";
+      break;
+    case 28:
+      StringCategoria = "Economia";
+      break;
+    case 30:
+      StringCategoria = "Esports";
+      break;
+    case 33:
+      StringCategoria = "Política";
+      break;
+    case 34:
+      StringCategoria = "Societat";
+      break;
+    case 6563:
+      StringCategoria = "Succesos";
+      break;
+    case 6564:
+      StringCategoria = "Territori";
+      break;
+
+    default:
+      StringCategoria = "Categoria";
+      break;
+  }
+  return StringCategoria;
+}
+
 const RenderItemNoticia = ({ title, date, categories, featured_media }) => {
   const entities = new AllHtmlEntities();
   title.rendered = entities.decode(title.rendered);
@@ -69,7 +108,7 @@ const RenderItemNoticia = ({ title, date, categories, featured_media }) => {
         <Text style={{ fontWeight: "bold" }}>{title.rendered}</Text>
         <View style={styles.itemLlistaNoticiesSeccio}>
           <Text style={styles.itemLlistaNoticiesSeccioText}>
-            {categories[0]}
+            {categoria(categories)}
           </Text>
         </View>
         <Text style={{ fontSize: 10 }}>{date}</Text>
