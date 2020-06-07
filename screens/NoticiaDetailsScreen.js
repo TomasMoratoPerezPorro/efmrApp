@@ -16,6 +16,9 @@ import HTMLView from "react-native-htmlview";
 
 const { width } = Dimensions.get("window");
 
+/* 
+CODI PER A UN CUSTOM RENDER NODE (NO ACONSEGUEIXO EL EFECTEDESITJAT)
+
 function renderNode(node, index, siblings, parent, defaultRenderer) {
   if (node.name == "img") {
     const { src, height } = node.attribs;
@@ -31,6 +34,12 @@ function renderNode(node, index, siblings, parent, defaultRenderer) {
         source={{ uri: src }}
       />
     );
+  }
+} */
+
+function renderNode(node, index, siblings, parent, defaultRenderer) {
+  if (node.name == "img") {
+    return null;
   }
 }
 
@@ -156,8 +165,6 @@ const BgImage = ({ mediaId }) => {
       ></FooterFoto>
     </View>
   );
-
-  
 };
 
 const About = () => {
@@ -245,6 +252,11 @@ var htmlstyles = StyleSheet.create({
   },
   p: {
     fontSize: 13,
+  },
+  h2: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 20,
   },
   strong: {
     fontWeight: "bold",
@@ -343,6 +355,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     flexDirection: "row",
     color: "#3B0D11",
+    marginVertical:40,
   },
 
   socialico: {

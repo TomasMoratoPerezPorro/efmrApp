@@ -8,13 +8,16 @@ import { SafeAreaProvider, useSafeArea } from "react-native-safe-area-context";
 import AudioDetailScreen from "./screens/AudioDetailScreen";
 import AudiosScreen from "./screens/AudiosScreen";
 import ContacteDetailScreen from "./screens/ContacteDetailScreen";
+import MesNoticiesScreen from "./screens/MesNoticiesScreen";
 import NoticiaDetailsScreen from "./screens/NoticiaDetailsScreen";
 import AudioPlayerTestScreen from "./screens/AudioPlayerTestScreen";
 import NoticiesScreen from "./screens/NoticiesScreen";
 import { NoticiesProvider } from "./model/NoticiesModel";
 import { useFonts } from "@use-expo/font";
 import "mobx-react-lite/batchingForReactNative";
+import {YellowBox} from 'react-native';
 
+console.disableYellowBox = true;
 
 
 const Stack = createStackNavigator();
@@ -92,6 +95,11 @@ export default function App() {
             <Stack.Screen
               name="AudioPlayerTestScreen"
               component={AudioPlayerTestScreen}
+              style={styles.typo}
+            />
+            <Stack.Screen
+              name="MesNoticiesScreen"
+              component={MesNoticiesScreen}
               style={styles.typo}
             />
             <Stack.Screen

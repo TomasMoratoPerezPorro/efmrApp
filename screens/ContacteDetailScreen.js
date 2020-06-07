@@ -5,22 +5,11 @@ import { SocialIcon } from "react-native-elements";
 const Contactes = ({ user5, user2 }) => {
   return (
     <ScrollView style={styles.page}>
-      <Header></Header>
       <InfoEspluga user5={user5}></InfoEspluga>
       <InfoTacoalt user5={user5}></InfoTacoalt>
       <InfoEsplugaAudio user5={user5}></InfoEsplugaAudio>
       <Redes></Redes>
     </ScrollView>
-  );
-};
-
-const Header = ({ user }) => {
-  return (
-    <View style={styles.header}>
-      <Text style={{ fontWeight: "bold", fontSize: 36, color: "white" }}>
-        CONTACTE
-      </Text>
-    </View>
   );
 };
 

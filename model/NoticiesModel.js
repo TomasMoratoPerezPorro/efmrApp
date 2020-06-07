@@ -9,11 +9,11 @@ const myForEach = async function asyncForEach(array, callback) {
 
 class NoticiesModel {
   @observable noticies = null;
+  @observable noticiesEtiqueta = null;
   @observable noticiaMesLlegida = null;
   @observable noticiesPortada = null;
   @observable noticiaMesLlegidaMediaFlag = false;
   @observable ultimsAudios = null;
-
 
   @action async loadUltimsAudios() {
     const response = await fetch(
@@ -29,6 +29,42 @@ class NoticiesModel {
     );
     const json = await response.json();
     this.noticies = json;
+  }
+
+  @action async loadNoticiesEtiqueta(etiqueta) {
+    var idCategoria = 96;
+    switch (etiqueta) {
+      case "Cultura":
+        idCategoria = 26;
+        break;
+      case "Economia":
+        idCategoria = 28;
+        break;
+      case "Esports":
+        idCategoria = 30;
+        break;
+      case "Política":
+        idCategoria = 33;
+        break;
+      case "Societat":
+        idCategoria = 34;
+        break;
+      case "Succesos":
+        idCategoria = 6563;
+        break;
+      case "Territori":
+        idCategoria = 6564;
+        break;
+
+      default:
+        idCategoria = 96;
+        break;
+    }
+    const response = await fetch(
+      "https://www.efmr.cat/wp-json/wp/v2/posts?categories="+idCategoria+"&per_page=10&_fields=id,date,title,content,excerpt,author,featured_media,categories"
+    );
+    const json = await response.json();
+    this.noticiesEtiqueta = json;
   }
 
   @action async loadNoticiesPortada() {
