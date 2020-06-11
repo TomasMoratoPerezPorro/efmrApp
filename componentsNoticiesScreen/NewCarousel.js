@@ -60,7 +60,7 @@ const NewCarousel = (props) => {
         onContentSizeChange={(w, h) => init(w)}
         onScroll={(data) => {
           setWidth(data.nativeEvent.contentSize.width);
-          setInterval(getInterval(data.nativeEvent.contentOffset.x));
+          setInterval(getInterval(data.nativeEvent.contentOffset.x+1));
         }}
         scrollEventThrottle={200}
         pagingEnabled
