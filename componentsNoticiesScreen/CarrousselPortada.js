@@ -3,6 +3,7 @@ import React, { useContext, useEffect } from "react";
 import { ActivityIndicator, Dimensions, StyleSheet, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import CarrousselItem from "../componentsNoticiesScreen/CarrousselItem";
+import NewCarousel from "../componentsNoticiesScreen/NewCarousel";
 import { NoticiesContext } from "../model/NoticiesModel";
 
 const windowWidth = Dimensions.get("window").width;
@@ -23,14 +24,8 @@ const CarrousselPortada = observer(({ navigation }) => {
       </View>
     );
   } else {
-    return (
-      <FlatList
-        data={noticies.noticiesPortada}
-        keyExtractor={(array) => array.id.toString()}
-        renderItem={({ item }) => <CarrousselItem {...item} />}
-        horizontal={true}
-      ></FlatList>
-    );
+    console.log("NOTICIES CAROUSEL PROPS:"+noticies.noticiesPortada);
+    return <NewCarousel style='slide' items={noticies.noticiesPortada} />;
   }
 });
 
@@ -49,3 +44,12 @@ const styles = StyleSheet.create({
     color: "black",
   },
 });
+
+{
+  /* <FlatList
+        data={noticies.noticiesPortada}
+        keyExtractor={(array) => array.id.toString()}
+        renderItem={({ item }) => <CarrousselItem {...item} />}
+        horizontal={true}
+      ></FlatList> */
+}

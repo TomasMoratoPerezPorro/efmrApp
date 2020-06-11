@@ -75,7 +75,7 @@ const CarrousselItem = ({ title, featured_media }) => {
     <View style={styles.CarrousselItemContainer}>
       <ImageBackground
         style={styles.CarrousselItemImage}
-        source={{ uri: mediaDetails.sizes.thumbnail.source_url }}
+        source={{ uri: mediaDetails.sizes.medium_large.source_url }}
       >
         <View style={styles.CarrousselItemOverlay}>
           <Text numberOfLines={2} style={styles.CarrousselText}>{title.rendered}</Text>
