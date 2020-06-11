@@ -10,6 +10,7 @@ import {
   Image,
   Dimensions,
   PixelRatio,
+  Linking
 } from "react-native";
 import { SocialIcon } from "react-native-elements";
 import HTMLView from "react-native-htmlview";
@@ -193,37 +194,25 @@ const About = () => {
           <SocialIcon
             style={styles.socialico}
             type="twitter"
-            onPress={() => {
-              this._toggleBottomNavigationView();
-              alert("twitter");
-            }}
+            onPress={ ()=>{ Linking.openURL('https://google.com')}}
           />
 
           <SocialIcon
             style={styles.socialico}
             type="facebook"
-            onPress={() => {
-              this._toggleBottomNavigationView();
-              alert("facebook");
-            }}
+            onPress={ ()=>{ Linking.openURL('https://google.com')}}
           />
 
           <SocialIcon
             style={styles.socialico}
             type="youtube"
-            onPress={() => {
-              this._toggleBottomNavigationView();
-              alert("youtube");
-            }}
+            onPress={ ()=>{ Linking.openURL('https://google.com')}}
           />
 
           <SocialIcon
             style={styles.socialico}
             type="instagram"
-            onPress={() => {
-              this._toggleBottomNavigationView();
-              alert("instagram");
-            }}
+            onPress={ ()=>{ Linking.openURL('https://google.com')}}
           />
         </View>
 
