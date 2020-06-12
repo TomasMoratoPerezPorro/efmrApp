@@ -6,7 +6,7 @@ const windowWidth = Dimensions.get("window").width;
 
 const NewCarousel = (props) => {
   const { items } = props;
-  console.log("ITEMPS PROPS CARROUSSEL" + items);
+  
   const itemsPerInterval =
     props.itemsPerInterval === undefined ? 1 : props.itemsPerInterval;
 

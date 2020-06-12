@@ -109,7 +109,7 @@ const Redes = () => {
 
 const ContacteDetailScreen = ({ route, navigation }) => {
   const { infoContacte } = route.params;
-  console.log(infoContacte);
+  
 
   return (
     <ScrollView style={styles.page}>

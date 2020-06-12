@@ -192,9 +192,7 @@ const AudioDetailScreen = ({ route, navigation }) => {
   const { imatges } = route.params;
   const { dadesAudio } = route.params;
   const { ultimsAudios } = route.params;
-  console.log(imatges);
-  console.log(dadesAudio);
-  console.log(ultimsAudios);
+  
 
   return (
     <ScrollView style={styles.page}>

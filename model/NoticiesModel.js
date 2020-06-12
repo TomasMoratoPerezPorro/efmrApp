@@ -82,9 +82,9 @@ class NoticiesModel {
     const json = await response.json();
     this.noticiaMesLlegida = json[0];
 
-    console.log(JSON.stringify(this.noticiaMesLlegida));
+    
     const idmedia = this.noticiaMesLlegida.featured_media;
-    console.log("NOTICIA MES LLEGIDA MEDIA:____" + idmedia);
+    
 
     const responseMedia = await fetch(
       "https://www.efmr.cat/wp-json/wp/v2/media/" +
@@ -93,14 +93,14 @@ class NoticiesModel {
     );
     const jsonmedia = await responseMedia.json();
     this.noticiaMesLlegida.media = jsonmedia;
-    console.log(JSON.stringify(this.noticiaMesLlegida.media));
+    
     this.noticiaMesLlegidaMediaFlag = true;
   }
 
   @action async loadMediaPortada() {
     await myForEach(this.noticiesPortada, async (noticia) => {
       var idmedia = noticia.featured_media;
-      console.log(idmedia);
+      
       try {
         const responseMedia = await fetch(
           "https://www.efmr.cat/wp-json/wp/v2/media/" +
@@ -115,25 +115,7 @@ class NoticiesModel {
     });
   }
 
-  /*
-  @action async loadMedia() {
-    await myForEach(this.noticies, async (noticia) => {
-      var idmedia = noticia.featured_media;
-      console.log(idmedia);
-      try {
-        const responseMedia = await fetch(
-          "https://www.efmr.cat/wp-json/wp/v2/media/" +
-            idmedia +
-            "?_fields=id,source_url,media_details"
-        );
-        const jsonmedia = await responseMedia.json();
-        noticia.media = jsonmedia;
-      } catch (error) {
-        console.log(error + "-----" + idmedia);
-      }
-    });
-  }
-  */
+  
 }
 
 const model = new NoticiesModel();

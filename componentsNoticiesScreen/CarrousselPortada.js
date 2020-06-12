@@ -24,7 +24,7 @@ const CarrousselPortada = observer(({ navigation }) => {
       </View>
     );
   } else {
-    console.log("NOTICIES CAROUSEL PROPS:"+noticies.noticiesPortada);
+    
     return <NewCarousel style='slide' items={noticies.noticiesPortada} />;
   }
 });

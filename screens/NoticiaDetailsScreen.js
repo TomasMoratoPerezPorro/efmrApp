@@ -54,7 +54,7 @@ function NoticiaDetailsScreen({ route, navigation }) {
   const { itemAuthor } = route.params;
   const { itemMedia } = route.params;
 
-  /* console.log(itemTitle);  */
+  
   return (
     <NoticiaContext.Provider
       value={{
